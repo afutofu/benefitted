@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Home from "./Home";
 import About from "./About";
 import FAQ from "./FAQ";
+import BookSlot from "./BookSlot";
 
 const MainComp = styled.div`
   background-color: #e9e8e3;
@@ -21,6 +22,7 @@ const Main = () => {
       <Home />
       <About />
       <FAQ />
+      <BookSlot />
     </MainComp>
   );
 };
