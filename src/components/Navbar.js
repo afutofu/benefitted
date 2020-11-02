@@ -4,16 +4,21 @@ import styled from "styled-components";
 import LanguagePicker from "./LanguagePicker";
 
 const NavbarComp = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 150px;
   padding: 30px 0;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #e9e8e3;
 `;
 
 const Container = styled.div`
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
