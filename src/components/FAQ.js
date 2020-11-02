@@ -13,7 +13,7 @@ const FAQComp = styled.section`
 `;
 
 const Container = styled.div`
-  width: 90%;
+  width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -28,14 +28,14 @@ const QA = styled.div`
 `;
 
 const Question = styled.h3`
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
   margin-bottom: 5px;
   font-weight: 600;
 `;
 
 const Answer = styled.p`
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.7em;
   margin: 0;
 
