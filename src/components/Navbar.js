@@ -15,6 +15,7 @@ const NavbarComp = styled.nav`
   justify-content: center;
   align-items: center;
   background-color: #e9e8e3;
+  z-index: 100;
 `;
 
 const Container = styled.div`
