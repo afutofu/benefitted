@@ -11,18 +11,19 @@ const HomeComp = styled.section`
 const Gallery = styled.div`
   position: relative;
   width: 100%;
-  height: 70vh;
+  height: 75vh;
   margin-top: 150px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.25);
   overflow: hidden;
 `;
 
 const ContainerWrapper = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   overflow-x: scroll;
   scrollbar-width: none;
-  padding-bottom: 20px;
+  padding-bottom: 25px;
   box-sizing: content-box;
 `;
 
@@ -30,7 +31,7 @@ const Container = styled.div`
   width: 90%;
   height: 100%;
   padding: 35px 9px;
-  padding-bottom: calc(35px - 20px);
+  padding-bottom: calc(35px - 25px);
   margin: 0 5%;
   display: flex;
   /* flex-direction: column; */
@@ -91,13 +92,13 @@ const upAndDown = keyframes`{
 const BottomArea = styled.div`
   width: 100%;
   height: calc(30vh - 150px);
+  min-height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
 
   i {
     font-size: 25px;
-    cursor: pointer;
     animation: ${upAndDown} 2.5s infinite;
   }
 `;
@@ -119,6 +120,7 @@ const Home = () => {
               <a
                 href="https://www.instagram.com/benefitted.id/"
                 target="_blank"
+                rel="noreferrer"
               >
                 Check our instagram for more!
               </a>

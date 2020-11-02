@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import Navbar from "./Navbar";
 import Home from "./Home";
+import About from "./About";
 import FAQ from "./FAQ";
 
 const MainComp = styled.div`
@@ -18,6 +19,7 @@ const Main = () => {
     <MainComp>
       <Navbar />
       <Home />
+      <About />
       <FAQ />
     </MainComp>
   );
