@@ -12,9 +12,13 @@ const Gallery = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  margin-top: 150px;
+  margin-top: 120px;
   background-color: rgba(255, 255, 255, 0.25);
   overflow: hidden;
+
+  @media only screen and (max-width: 1200px) {
+    margin-top: 100px;
+  }
 
   @media only screen and (max-width: 992px) {
     margin-top: 90px;
@@ -101,7 +105,7 @@ const upAndDown = keyframes`{
 
 const BottomArea = styled.div`
   width: 100%;
-  height: 70px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,6 +118,10 @@ const BottomArea = styled.div`
     @media only screen and (max-width: 992px) {
       font-size: 20px;
     }
+  }
+
+  @media only screen and (max-width: 992px) {
+    height: 70px;
   }
 `;
 

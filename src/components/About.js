@@ -8,7 +8,7 @@ import mission from "../assets/mission.png";
 const AboutComp = styled.section`
   width: 100%;
   height: 100%;
-  padding: 80px 0;
+  padding: 150px 0;
 `;
 
 const Container = styled.div`
@@ -30,8 +30,13 @@ const Pair = styled.div`
 const Image = styled.img.attrs((props) => ({
   src: props.src,
 }))`
-  width: 230px;
-  height: 540px;
+  width: 200px;
+  height: 500px;
+
+  @media only screen and (max-width: 1200px) {
+    width: 150px;
+    height: 380px;
+  }
 
   @media only screen and (max-width: 992px) {
     width: 120px;
@@ -45,20 +50,27 @@ const Image = styled.img.attrs((props) => ({
 `;
 
 const Text = styled.p`
-  width: 160px;
-  padding: 10px;
-  line-height: 1.8em;
+  width: 130px;
+  padding: 15px;
+  line-height: 2em;
   font-size: 16px;
   text-align: center;
+
+  @media only screen and (max-width: 1200px) {
+    width: 100px;
+    font-size: 14px;
+    line-height: 1.8em;
+  }
 
   @media only screen and (max-width: 992px) {
     width: 90px;
     font-size: 12px;
+    padding: 10px;
   }
 
   @media only screen and (max-width: 768px) {
     width: 70px;
-    font-size: 10px;
+    font-size: 9px;
   }
 `;
 
@@ -86,10 +98,14 @@ const LogoImage = styled.img.attrs((props) => ({
 
 const IntroShadow = styled.div`
   position: relative;
-  font-size: 40px;
+  font-size: 35px;
   margin: 0;
   font-weight: 800;
   color: #d3c092;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 25px;
+  }
 
   @media only screen and (max-width: 992px) {
     font-size: 20px;
@@ -103,10 +119,15 @@ const IntroShadow = styled.div`
 const IntroText = styled.h1`
   position: absolute;
   top: -6px;
-  font-size: 40px;
+  font-size: 35px;
   margin: 0;
   font-weight: 800;
   color: black;
+
+  @media only screen and (max-width: 1200px) {
+    top: -4px;
+    font-size: 25px;
+  }
 
   @media only screen and (max-width: 992px) {
     top: -3px;
@@ -121,27 +142,35 @@ const IntroText = styled.h1`
 const TitleShadow = styled.div`
   position: relative;
 
-  font-size: 55px;
+  font-size: 50px;
   margin: 0;
   font-weight: 800;
   color: #d3c092;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 40px;
+  }
 
   @media only screen and (max-width: 992px) {
     font-size: 30px;
   }
 
   @media only screen and (max-width: 768px) {
-    font-size: 25px;
+    font-size: 20px;
   }
 `;
 
 const TitleText = styled.h1`
   position: absolute;
   top: -6px;
-  font-size: 55px;
+  font-size: 50px;
   margin: 0;
   font-weight: 800;
   color: black;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 40px;
+  }
 
   @media only screen and (max-width: 992px) {
     top: -4px;
@@ -149,7 +178,7 @@ const TitleText = styled.h1`
   }
 
   @media only screen and (max-width: 768px) {
-    font-size: 25px;
+    font-size: 20px;
   }
 `;
 
@@ -157,12 +186,16 @@ const Motto = styled.h2`
   font-size: 14px;
   font-weight: 800;
 
+  @media only screen and (max-width: 1200px) {
+    font-size: 11px;
+  }
+
   @media only screen and (max-width: 992px) {
     font-size: 9px;
   }
 
   @media only screen and (max-width: 768px) {
-    font-size: 7px;
+    font-size: 6px;
   }
 `;
 

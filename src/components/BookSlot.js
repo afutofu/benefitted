@@ -26,12 +26,12 @@ const Slots = styled.div`
 `;
 
 const Slot = styled.div`
-  width: 90px;
-  height: 90px;
+  width: 70px;
+  height: 70px;
   border: 1px solid #707070;
-  border-radius: 20px;
-  margin-right: 30px;
-  margin-bottom: 30px;
+  border-radius: 15px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 
   @media only screen and (max-width: 992px) {
     width: 50px;

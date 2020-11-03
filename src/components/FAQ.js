@@ -27,6 +27,10 @@ const QA = styled.div`
   margin-bottom: 45px;
   font-size: 14px;
 
+  @media only screen and (max-width: 1200px) {
+    font-size: 13px;
+  }
+
   @media only screen and (max-width: 992px) {
     font-size: 12px;
   }
