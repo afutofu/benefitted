@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 
 import logo from "../assets/logo.png";
@@ -28,11 +28,23 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Pair = styled.div`
   display: flex;
   align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 150px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
 
 const Image = styled.img.attrs((props) => ({
@@ -52,8 +64,8 @@ const Image = styled.img.attrs((props) => ({
   }
 
   @media only screen and (max-width: 768px) {
-    width: 80px;
-    height: 240px;
+    width: 200px;
+    height: 500px;
   }
 `;
 
@@ -77,8 +89,8 @@ const Text = styled.p`
   }
 
   @media only screen and (max-width: 768px) {
-    width: 70px;
-    font-size: 9px;
+    width: 100%;
+    font-size: 16px;
   }
 `;
 
@@ -91,6 +103,10 @@ const Logo = styled.div`
   text-transform: uppercase;
   position: relative;
   top: -20px;
+
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 150px;
+  }
 `;
 
 const LogoImage = styled.img.attrs((props) => ({
@@ -120,7 +136,7 @@ const IntroShadow = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    font-size: 15px;
+    font-size: 35px;
   }
 `;
 
@@ -143,7 +159,7 @@ const IntroText = styled.h1`
   }
 
   @media only screen and (max-width: 768px) {
-    font-size: 15px;
+    font-size: 35px;
   }
 `;
 
@@ -164,7 +180,7 @@ const TitleShadow = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    font-size: 20px;
+    font-size: 50px;
   }
 `;
 
@@ -186,7 +202,7 @@ const TitleText = styled.h1`
   }
 
   @media only screen and (max-width: 768px) {
-    font-size: 20px;
+    font-size: 50px;
   }
 `;
 
@@ -203,12 +219,58 @@ const Motto = styled.h2`
   }
 
   @media only screen and (max-width: 768px) {
-    font-size: 6px;
+    font-size: 14px;
   }
 `;
 
 const About = () => {
   const [language] = useContext(LanguageContext);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateDimensions);
+  }, []);
+
+  const updateDimensions = () => {
+    setWidth(window.innerWidth);
+  };
+
+  if (width < 768) {
+    return (
+      <AboutComp>
+        <Container>
+          <Logo>
+            <LogoImage src={logo} />
+            <IntroShadow>
+              introducing
+              <IntroText>introducing</IntroText>
+            </IntroShadow>
+            <TitleShadow>
+              benefitted
+              <TitleText>benefitted</TitleText>
+            </TitleShadow>
+            <Motto>custom wear and thrifted goods</Motto>
+          </Logo>
+          <Pair>
+            <Image src={vision} />
+            <Text>
+              {language === "english"
+                ? "Society working together, keeping in mind what's best, both for the community and the environment."
+                : "Masyarakat bekerja sama, dengan memperhatikan yang terbaik, baik untuk masyarakat maupun lingkungan."}
+            </Text>
+          </Pair>
+          <Pair>
+            <Text>
+              {language === "english"
+                ? "To provide an engaging, fun, and artistic solution to combat fast fashion and its various impacts on the environment."
+                : "Memberikan solusi yang menarik, menyenangkan, dan artistik untuk memerangi fast fashion dan berbagai dampaknya terhadap lingkungan."}
+            </Text>
+            <Image src={mission} />
+          </Pair>
+        </Container>
+      </AboutComp>
+    );
+  }
 
   return (
     <AboutComp>
