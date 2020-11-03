@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import FAQ from "./components/FAQ";
 import BookSlot from "./components/BookSlot";
+import Footer from "./components/Footer";
 
 import { LanguageProvider } from "./LanguageContext";
 
@@ -27,6 +28,7 @@ const App = () => {
         <About />
         <FAQ />
         <BookSlot />
+        <Footer />
       </AppComp>
     </LanguageProvider>
   );
