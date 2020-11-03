@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+
+import { LanguageContext } from "../LanguageContext";
 
 const BookSlotComp = styled.section`
   width: 100%;
@@ -67,36 +69,68 @@ const InfoText = styled.p`
 `;
 
 const BookSlot = () => {
+  const [language] = useContext(LanguageContext);
   const date = new Date();
   const monthIndex = date.getMonth();
   const year = date.getFullYear();
 
   const getMonthName = (monthIndex) => {
+    if (language === "english") {
+      switch (monthIndex) {
+        case 0:
+          return "January";
+        case 1:
+          return "February";
+        case 2:
+          return "March";
+        case 3:
+          return "April";
+        case 4:
+          return "May";
+        case 5:
+          return "June";
+        case 6:
+          return "July";
+        case 7:
+          return "August";
+        case 8:
+          return "September";
+        case 9:
+          return "October";
+        case 10:
+          return "November";
+        case 11:
+          return "December";
+        default:
+          break;
+      }
+    }
+
     switch (monthIndex) {
       case 0:
-        return "January";
+        return "Januari";
       case 1:
-        return "February";
+        return "Februari";
       case 2:
-        return "March";
+        return "Maret";
       case 3:
         return "April";
       case 4:
-        return "May";
+        return "Mei";
       case 5:
-        return "June";
+        return "Juni";
       case 6:
-        return "July";
+        return "Juli";
       case 7:
-        return "August";
+        return "Agustus";
       case 8:
         return "September";
       case 9:
-        return "October";
+        return "Oktober";
       case 10:
         return "November";
       case 11:
-        return "December";
+        return "Desember";
       default:
         break;
     }
@@ -125,12 +159,20 @@ const BookSlot = () => {
         <InfoArea>
           <InfoTitle>{monthName}</InfoTitle>
           <InfoText>
-            We're not open all the time, these are our available slots for now.
+            {language === "english"
+              ? "We're not open all the time, these are our available slots for now."
+              : "Kami tidak buka setiap saat, ini adalah slot yang tersedia untuk saat ini."}
           </InfoText>
           <InfoText>
-            Look at the empty slots and send us a DM on Instagram.
+            {language === "english"
+              ? "Look at the empty slots and send us a DM on Instagram."
+              : "Lihat slot kosong dan kirimkan DM di Instagram."}
           </InfoText>
-          <InfoText>We'll get back to you as soon as we can.</InfoText>
+          <InfoText>
+            {language === "english"
+              ? "We'll get back to you as soon as we can."
+              : "Kami akan menghubungi Anda kembali secepat kami bisa."}
+          </InfoText>
         </InfoArea>
       </Container>
     </BookSlotComp>

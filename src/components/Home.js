@@ -31,7 +31,7 @@ const ContainerWrapper = styled.div`
   height: 100%;
   overflow-x: scroll;
   scrollbar-width: none;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
   box-sizing: content-box;
 `;
 
@@ -39,7 +39,7 @@ const Container = styled.div`
   width: 90%;
   height: 100%;
   padding: 35px 9px;
-  padding-bottom: calc(35px - 25px);
+  padding-bottom: calc(35px - 20px);
   margin: 0 5%;
   display: flex;
   /* flex-direction: column; */

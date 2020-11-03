@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import logo from "../assets/logo.png";
 import vision from "../assets/vision.png";
 import mission from "../assets/mission.png";
+
+import { LanguageContext } from "../LanguageContext";
 
 const AboutComp = styled.section`
   width: 100%;
@@ -200,14 +202,17 @@ const Motto = styled.h2`
 `;
 
 const About = () => {
+  const [language] = useContext(LanguageContext);
+
   return (
     <AboutComp>
       <Container>
         <Pair>
           <Image src={vision} />
           <Text>
-            Society working together, keeping in mind what's best, both for the
-            community and the environment.
+            {language === "english"
+              ? "Society working together, keeping in mind what's best, both for the community and the environment."
+              : "Masyarakat bekerja sama, dengan memperhatikan yang terbaik, baik untuk masyarakat maupun lingkungan."}
           </Text>
         </Pair>
         <Logo>
@@ -224,8 +229,9 @@ const About = () => {
         </Logo>
         <Pair>
           <Text>
-            Society working together, keeping in mind what's best, both for the
-            community and the environment.
+            {language === "english"
+              ? "To provide an engaging, fun, and artistic solution to combat fast fashion and its various impacts on the environment."
+              : "Memberikan solusi yang menarik, menyenangkan, dan artistik untuk memerangi fast fashion dan berbagai dampaknya terhadap lingkungan."}
           </Text>
           <Image src={mission} />
         </Pair>

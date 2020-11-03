@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+
+import { LanguageContext } from "../LanguageContext";
 
 const LanguagePickerComp = styled.ul`
   padding: 0;
@@ -15,6 +17,7 @@ const LanguagePickerComp = styled.ul`
 `;
 
 const LanguageOption = styled.li`
+  position: relative;
   text-transform: uppercase;
   font-size: 18px;
   font-weight: 500;
@@ -35,7 +38,7 @@ const LanguageOption = styled.li`
 `;
 
 const Separator = styled.p`
-  margin: 0 10px;
+  margin: 0 5px;
   display: flex;
   align-items: center;
   font-size: 18px;
@@ -46,7 +49,7 @@ const Separator = styled.p`
 
   @media only screen and (max-width: 992px) {
     font-size: 14px;
-    margin: 0 5px;
+    margin: 0 2px;
   }
 
   @media only screen and (max-width: 768px) {
@@ -54,12 +57,39 @@ const Separator = styled.p`
   }
 `;
 
+const UnderlineWrapper = styled.div`
+  position: absolute;
+  bottom: 3px;
+  width: calc(100% - 10px);
+  height: 4px;
+  overflow: hidden;
+  opacity: ${(props) => (props.selected ? "1" : "0")};
+`;
+
+const Underline = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #d3c092;
+`;
+
 const LanguagePicker = () => {
+  const [language, setLanguage] = useContext(LanguageContext);
+
   return (
     <LanguagePickerComp>
-      <LanguageOption>en</LanguageOption>
+      <LanguageOption onClick={() => setLanguage("english")}>
+        en
+        <UnderlineWrapper selected={language === "english"}>
+          <Underline />
+        </UnderlineWrapper>
+      </LanguageOption>
       <Separator>/</Separator>
-      <LanguageOption>id</LanguageOption>
+      <LanguageOption onClick={() => setLanguage("indonesian")}>
+        id
+        <UnderlineWrapper selected={language === "indonesian"}>
+          <Underline />
+        </UnderlineWrapper>
+      </LanguageOption>
     </LanguagePickerComp>
   );
 };
