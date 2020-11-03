@@ -6,10 +6,16 @@ import { LanguageContext } from "../LanguageContext";
 const BookSlotComp = styled.section`
   width: 100%;
   height: 100%;
-  padding: 80px 0;
+  padding: 20vh 0;
+  padding-bottom: 30vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+
+  @media only screen and (max-width: 992px) {
+    padding: 15vh 0;
+    padding-bottom: 30vh;
+  }
 `;
 
 const Container = styled.div`

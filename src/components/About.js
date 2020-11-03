@@ -10,7 +10,13 @@ import { LanguageContext } from "../LanguageContext";
 const AboutComp = styled.section`
   width: 100%;
   height: 100%;
-  padding: 150px 0;
+  padding: 20vh 0;
+  padding-top: 30vh;
+
+  @media only screen and (max-width: 992px) {
+    padding: 15vh 0;
+    padding-top: 30vh;
+  }
 `;
 
 const Container = styled.div`
@@ -120,7 +126,7 @@ const IntroShadow = styled.div`
 
 const IntroText = styled.h1`
   position: absolute;
-  top: -6px;
+  top: -5px;
   font-size: 35px;
   margin: 0;
   font-weight: 800;

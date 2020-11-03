@@ -7,11 +7,14 @@ import { LanguageContext } from "../LanguageContext";
 const FAQComp = styled.section`
   width: 100%;
   height: 100%;
-  min-height: 800px;
-  padding: 80px 0;
+  padding: 20vh 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+
+  @media only screen and (max-width: 992px) {
+    padding: 15vh 0;
+  }
 `;
 
 const Container = styled.div`
