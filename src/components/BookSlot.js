@@ -32,6 +32,14 @@ const Slot = styled.div`
   border-radius: 20px;
   margin-right: 30px;
   margin-bottom: 30px;
+
+  @media only screen and (max-width: 992px) {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+  }
 `;
 
 const InfoArea = styled.div`
@@ -42,12 +50,20 @@ const InfoArea = styled.div`
 const InfoTitle = styled.h3`
   font-size: 26px;
   margin: 0;
+
+  @media only screen and (max-width: 992px) {
+    font-size: 20px;
+  }
 `;
 
 const InfoText = styled.p`
   font-size: 16px;
   line-height: 1.5em;
   margin-bottom: 20px;
+
+  @media only screen and (max-width: 992px) {
+    font-size: 14px;
+  }
 `;
 
 const BookSlot = () => {

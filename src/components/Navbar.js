@@ -16,6 +16,10 @@ const NavbarComp = styled.nav`
   align-items: center;
   background-color: #e9e8e3;
   z-index: 100;
+
+  @media only screen and (max-width: 992px) {
+    height: 90px;
+  }
 `;
 
 const Container = styled.div`
@@ -32,6 +36,14 @@ const Title = styled.h1`
   font-weight: 700;
   padding: 5px;
   cursor: pointer;
+
+  @media only screen and (max-width: 992px) {
+    font-size: 40px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 35px;
+  }
 `;
 
 const NavItems = styled.ul`
@@ -47,6 +59,15 @@ const NavItem = styled.li`
   margin: 0 20px;
   font-weight: 500;
   cursor: pointer;
+
+  @media only screen and (max-width: 992px) {
+    font-size: 14px;
+    margin: 0 10px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const Navbar = () => {

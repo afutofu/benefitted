@@ -11,10 +11,14 @@ const HomeComp = styled.section`
 const Gallery = styled.div`
   position: relative;
   width: 100%;
-  height: 75vh;
+  height: 100%;
   margin-top: 150px;
   background-color: rgba(255, 255, 255, 0.25);
   overflow: hidden;
+
+  @media only screen and (max-width: 992px) {
+    margin-top: 90px;
+  }
 `;
 
 const ContainerWrapper = styled.div`
@@ -45,6 +49,7 @@ const Image = styled.div`
   min-height: 50vh;
   background-color: #e2d6c0;
   margin-right: 50px;
+  transform-origin: center center;
   /* margin-bottom: 50px; */
 `;
 
@@ -57,9 +62,14 @@ const Prompt = styled.div`
   a {
     text-decoration: none;
     color: black;
+    font-size: 16px;
 
     :hover {
       color: grey;
+    }
+
+    @media only screen and (max-width: 992px) {
+      font-size: 14px;
     }
   }
 `;
@@ -91,15 +101,19 @@ const upAndDown = keyframes`{
 
 const BottomArea = styled.div`
   width: 100%;
-  height: calc(30vh - 150px);
-  min-height: 70px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
 
   i {
+    position: relative;
     font-size: 25px;
     animation: ${upAndDown} 2.5s infinite;
+
+    @media only screen and (max-width: 992px) {
+      font-size: 20px;
+    }
   }
 `;
 

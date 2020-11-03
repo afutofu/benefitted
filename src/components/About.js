@@ -19,6 +19,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
 `;
 
 const Pair = styled.div`
@@ -31,6 +32,16 @@ const Image = styled.img.attrs((props) => ({
 }))`
   width: 230px;
   height: 540px;
+
+  @media only screen and (max-width: 992px) {
+    width: 120px;
+    height: 300px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 80px;
+    height: 240px;
+  }
 `;
 
 const Text = styled.p`
@@ -39,6 +50,16 @@ const Text = styled.p`
   line-height: 1.8em;
   font-size: 16px;
   text-align: center;
+
+  @media only screen and (max-width: 992px) {
+    width: 90px;
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 70px;
+    font-size: 10px;
+  }
 `;
 
 const Logo = styled.div`
@@ -57,15 +78,26 @@ const LogoImage = styled.img.attrs((props) => ({
 }))`
   width: 60%;
   margin-bottom: 10px;
+
+  @media only screen and (max-width: 992px) {
+    width: 50%;
+  }
 `;
 
 const IntroShadow = styled.div`
   position: relative;
-
   font-size: 40px;
   margin: 0;
   font-weight: 800;
   color: #d3c092;
+
+  @media only screen and (max-width: 992px) {
+    font-size: 20px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 const IntroText = styled.h1`
@@ -75,6 +107,15 @@ const IntroText = styled.h1`
   margin: 0;
   font-weight: 800;
   color: black;
+
+  @media only screen and (max-width: 992px) {
+    top: -3px;
+    font-size: 20px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 const TitleShadow = styled.div`
@@ -84,6 +125,14 @@ const TitleShadow = styled.div`
   margin: 0;
   font-weight: 800;
   color: #d3c092;
+
+  @media only screen and (max-width: 992px) {
+    font-size: 30px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 25px;
+  }
 `;
 
 const TitleText = styled.h1`
@@ -93,11 +142,28 @@ const TitleText = styled.h1`
   margin: 0;
   font-weight: 800;
   color: black;
+
+  @media only screen and (max-width: 992px) {
+    top: -4px;
+    font-size: 30px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 25px;
+  }
 `;
 
 const Motto = styled.h2`
   font-size: 14px;
   font-weight: 800;
+
+  @media only screen and (max-width: 992px) {
+    font-size: 9px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 7px;
+  }
 `;
 
 const About = () => {

@@ -25,17 +25,20 @@ const QA = styled.div`
   width: 100%;
   text-align: center;
   margin-bottom: 45px;
+  font-size: 14px;
+
+  @media only screen and (max-width: 992px) {
+    font-size: 12px;
+  }
 `;
 
 const Question = styled.h3`
-  font-size: 14px;
   margin: 0;
   margin-bottom: 5px;
   font-weight: 600;
 `;
 
 const Answer = styled.p`
-  font-size: 14px;
   line-height: 1.7em;
   margin: 0;
 
