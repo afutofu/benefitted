@@ -9,7 +9,8 @@ import FAQ from "./components/FAQ";
 import BookSlot from "./components/BookSlot";
 import Footer from "./components/Footer";
 
-import { LanguageProvider } from "./LanguageContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import { AdminProvider } from "./contexts/AdminContext";
 
 const AppComp = styled.div`
   background-color: #e9e8e3;
@@ -22,14 +23,16 @@ const AppComp = styled.div`
 const App = () => {
   return (
     <LanguageProvider>
-      <AppComp>
-        <Navbar />
-        <Home />
-        <About />
-        <FAQ />
-        <BookSlot />
-        <Footer />
-      </AppComp>
+      <AdminProvider>
+        <AppComp>
+          <Navbar />
+          <Home />
+          <About />
+          <FAQ />
+          <BookSlot />
+          <Footer />
+        </AppComp>
+      </AdminProvider>
     </LanguageProvider>
   );
 };

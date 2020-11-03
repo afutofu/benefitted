@@ -5,7 +5,7 @@ import logo from "../assets/logo.png";
 import vision from "../assets/vision.png";
 import mission from "../assets/mission.png";
 
-import { LanguageContext } from "../LanguageContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 const AboutComp = styled.section`
   width: 100%;

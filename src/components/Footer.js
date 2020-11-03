@@ -11,6 +11,7 @@ const FooterComp = styled.div`
 `;
 
 const Container = styled.div`
+  position: relative;
   width: 90%;
   height: 100%;
   margin: 0 5%;
@@ -18,12 +19,22 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   color: rgba(0, 0, 0, 0.3);
+
+  i {
+    position: absolute;
+    right: 0px;
+    color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
 `;
 
 const Footer = () => {
   return (
     <FooterComp>
-      <Container>&#169; 2020 Benefitted. All rights reserved</Container>
+      <Container>
+        &#169; 2020 Benefitted. All rights reserved
+        <i class="fas fa-sign-in-alt"></i>
+      </Container>
     </FooterComp>
   );
 };

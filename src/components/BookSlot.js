@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 
-import { LanguageContext } from "../LanguageContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 const BookSlotComp = styled.section`
   width: 100%;
