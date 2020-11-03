@@ -8,7 +8,10 @@ export const AdminProvider = (props) => {
 
   return (
     <AdminContext.Provider
-      value={{ admin: [isAdmin, setIsAdmin], modal: [modalOpen, setModalOpen] }}
+      value={{
+        admin: { isAdmin, setIsAdmin },
+        modal: { modalOpen, setModalOpen },
+      }}
     >
       {props.children}
     </AdminContext.Provider>

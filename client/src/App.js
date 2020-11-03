@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import "./styles.css";
 
+import AdminModal from "./components/AdminModal";
+
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -25,6 +27,7 @@ const App = () => {
     <LanguageProvider>
       <AdminProvider>
         <AppComp>
+          <AdminModal />
           <Navbar />
           <Home />
           <About />
