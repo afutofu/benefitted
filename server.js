@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
 require("dotenv/config");
@@ -13,21 +14,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // API ROUTES
-app.post("/api/auth", (req, res) => {
-  const { password } = req.body;
+const authRoutes = require("./routes/api/auth");
+const slotDateRoutes = require("./routes/api/slotDate");
 
-  console.log(password, process.env.ADMIN_PASSWORD);
+app.use("/api/auth", authRoutes);
+app.use("/api/slotDate", slotDateRoutes);
 
-  if (!password) {
-    return res.status(400).json({ msg: "Please enter field" });
-  }
-
-  if (password !== process.env.ADMIN_PASSWORD) {
-    return res.status(400).json({ msg: "Invalid credentials" });
-  }
-
-  return res.send();
-});
+// CONNECT TO DB
+mongoose.connect(
+  process.env.DB_CONNECTION,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  },
+  () => console.log("Connected to DB!")
+);
 
 // SERVE STATIC ASSETS IF IN PRODUCTION
 if (process.env.NODE_ENV === "production") {

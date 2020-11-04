@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 import { LanguageContext } from "../contexts/LanguageContext";
+import { AdminContext } from "../contexts/AdminContext";
 
 const BookSlotComp = styled.section`
   width: 100%;
@@ -58,6 +60,21 @@ const Slot = styled.div`
   border-radius: 12px;
   margin-right: 20px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.booked && "#e2d6c0"};
+  cursor: ${(props) => (props.isAdmin ? "pointer" : "default")};
+
+  transition: background-color 0.2s;
+
+  :hover {
+    background-color: ${(props) => props.isAdmin && "#e2d6c0"};
+  }
+
+  :active {
+    background-color: ${(props) => props.isAdmin && "#d3c092"};
+  }
 
   @media only screen and (max-width: 992px) {
     width: 50px;
@@ -120,37 +137,53 @@ const InfoText = styled.p`
 `;
 
 const BookSlot = () => {
+  const [slotsBooked, setSlotsBooked] = useState([]);
   const [language] = useContext(LanguageContext);
+  const { admin } = useContext(AdminContext);
+
+  const { isAdmin } = admin;
+
   const date = new Date();
-  const monthIndex = date.getMonth();
+
+  const monthIndex = date.getMonth() + 1;
   const year = date.getFullYear();
+
+  // Get all booked slot dates
+  useEffect(() => {
+    axios
+      .get(`/api/slotDate/${year}/${monthIndex}`)
+      .then((res) => {
+        setSlotsBooked([...res.data]);
+      })
+      .catch();
+  }, [year, monthIndex]);
 
   const getMonthName = (monthIndex) => {
     if (language === "english") {
       switch (monthIndex) {
-        case 0:
-          return "January";
         case 1:
-          return "February";
+          return "January";
         case 2:
-          return "March";
+          return "February";
         case 3:
-          return "April";
+          return "March";
         case 4:
-          return "May";
+          return "April";
         case 5:
-          return "June";
+          return "May";
         case 6:
-          return "July";
+          return "June";
         case 7:
-          return "August";
+          return "July";
         case 8:
-          return "September";
+          return "August";
         case 9:
-          return "October";
+          return "September";
         case 10:
-          return "November";
+          return "October";
         case 11:
+          return "November";
+        case 12:
           return "December";
         default:
           break;
@@ -158,29 +191,29 @@ const BookSlot = () => {
     }
 
     switch (monthIndex) {
-      case 0:
-        return "Januari";
       case 1:
-        return "Februari";
+        return "Januari";
       case 2:
-        return "Maret";
+        return "Februari";
       case 3:
-        return "April";
+        return "Maret";
       case 4:
-        return "Mei";
+        return "April";
       case 5:
-        return "Juni";
+        return "Mei";
       case 6:
-        return "Juli";
+        return "Juni";
       case 7:
-        return "Agustus";
+        return "Juli";
       case 8:
-        return "September";
+        return "Agustus";
       case 9:
-        return "Oktober";
+        return "September";
       case 10:
-        return "November";
+        return "Oktober";
       case 11:
+        return "November";
+      case 12:
         return "Desember";
       default:
         break;
@@ -195,18 +228,56 @@ const BookSlot = () => {
     return new Date(year, month, 0).getDate();
   };
 
+  const isBooked = (day) => {
+    let booked = false;
+
+    slotsBooked.forEach((bookedSlot) => {
+      if (bookedSlot.day === day) {
+        booked = true;
+      }
+    });
+
+    return booked;
+  };
+
   const monthName = getMonthName(monthIndex);
-  const numDays = daysInMonth(monthIndex + 1, year);
+  const numDays = daysInMonth(monthIndex, year);
+
+  // Book a slot date
+  const bookSlot = (day) => {
+    if (isAdmin) {
+      axios
+        .post("/api/slotDate", { day })
+        .then((res) => {
+          setSlotsBooked((slotsBooked) => [...slotsBooked, res.data]);
+        })
+        .catch();
+    }
+  };
 
   let slots = [];
-  for (let i = 0; i < numDays; i++) {
-    slots.push(<Slot key={i} />);
+  console.log(slotsBooked);
+  for (let day = 1; day <= numDays; day++) {
+    slots.push(
+      <Slot
+        key={day}
+        isAdmin={isAdmin}
+        onClick={() => bookSlot(day)}
+        booked={isBooked(day)}
+      >
+        {day}
+      </Slot>
+    );
   }
 
   return (
     <BookSlotComp id="bookslot">
       <Container>
-        <Slots>{slots}</Slots>
+        <Slots>
+          {slots.map((slot) => {
+            return slot;
+          })}
+        </Slots>
         <InfoArea>
           <InfoTitle>{monthName}</InfoTitle>
           <InfoText>

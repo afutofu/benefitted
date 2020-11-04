@@ -141,10 +141,10 @@ const Navbar = () => {
 
   let navbar = useRef(null);
 
+  // Make navbar hide and appear based on scrolling
   useEffect(() => {
     navbar.style.top = "0px";
     const navbarClass = "." + navbar.getAttribute("class").split(" ").join(".");
-    console.log(navbarClass);
     let lastScrollPosition = 0;
     window.addEventListener("scroll", () => {
       // Get navbar element
