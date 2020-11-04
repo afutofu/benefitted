@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
 
@@ -17,6 +17,8 @@ const NavbarComp = styled.nav`
   align-items: center;
   background-color: #e9e8e3;
   z-index: 100;
+
+  transition: top 0.3s;
 
   @media only screen and (max-width: 1200px) {
     height: 100px;
@@ -108,6 +110,12 @@ const NavItem = styled.li`
   font-weight: 500;
   cursor: pointer;
 
+  transition: color 0.1s;
+
+  &:hover {
+    color: #d3c092;
+  }
+
   @media only screen and (max-width: 1200px) {
     font-size: 16px;
   }
@@ -131,8 +139,44 @@ const NavItem = styled.li`
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
 
+  let navbar = useRef(null);
+
+  useEffect(() => {
+    navbar.style.top = "0px";
+    const navbarClass = "." + navbar.getAttribute("class").split(" ").join(".");
+    console.log(navbarClass);
+    let lastScrollPosition = 0;
+    window.addEventListener("scroll", () => {
+      // Get navbar element
+      const navbarDOM = document.querySelector(navbarClass);
+
+      // Get position of top of screen, cross browser compatible
+      let topOfScreenPosition =
+        window.pageYOffset || document.documentElement.scrollTop;
+
+      // Make navbar stick until out of its height value
+      if (topOfScreenPosition < navbarDOM.clientHeight) {
+        navbarDOM.style.top = "0";
+
+        // Get rid of shadow once it reaches 10px from top
+        if (topOfScreenPosition < 10) {
+          navbarDOM.style.boxShadow = "";
+        }
+
+        // Scrolling down
+      } else if (topOfScreenPosition > lastScrollPosition) {
+        navbarDOM.style.top = `-${navbarDOM.clientHeight}px`;
+      } else {
+        // Scrolling up
+        navbarDOM.style.top = "0";
+        navbarDOM.style.boxShadow = "0px 1px 15px 0px rgba(0, 0, 0, 0.1)";
+      }
+      lastScrollPosition = topOfScreenPosition;
+    });
+  }, [navbar]);
+
   return (
-    <NavbarComp>
+    <NavbarComp ref={(el) => (navbar = el)}>
       <Container>
         <Title>
           <Link
@@ -157,48 +201,42 @@ const Navbar = () => {
         </Hamburger>
         <Backdrop navOpen={navOpen} />
         <NavItems navOpen={navOpen}>
-          <NavItem>
-            <Link
-              to="about"
-              smooth={true}
-              duration={1000}
-              onClick={() => {
-                setTimeout(() => {
-                  setNavOpen(false);
-                }, 100);
-              }}
-            >
-              about
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link
-              to="faq"
-              smooth={true}
-              duration={1000}
-              onClick={() => {
-                setTimeout(() => {
-                  setNavOpen(false);
-                }, 100);
-              }}
-            >
-              faq
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link
-              to="bookslot"
-              smooth={true}
-              duration={1000}
-              onClick={() => {
-                setTimeout(() => {
-                  setNavOpen(false);
-                }, 100);
-              }}
-            >
-              book slot
-            </Link>
-          </NavItem>
+          <Link
+            to="about"
+            smooth={true}
+            duration={1000}
+            onClick={() => {
+              setTimeout(() => {
+                setNavOpen(false);
+              }, 100);
+            }}
+          >
+            <NavItem>about</NavItem>
+          </Link>
+          <Link
+            to="faq"
+            smooth={true}
+            duration={1000}
+            onClick={() => {
+              setTimeout(() => {
+                setNavOpen(false);
+              }, 100);
+            }}
+          >
+            <NavItem>faq</NavItem>
+          </Link>
+          <Link
+            to="bookslot"
+            smooth={true}
+            duration={1000}
+            onClick={() => {
+              setTimeout(() => {
+                setNavOpen(false);
+              }, 100);
+            }}
+          >
+            <NavItem>book slot</NavItem>
+          </Link>
           <LanguagePicker setNavOpen={setNavOpen} />
         </NavItems>
       </Container>

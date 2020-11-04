@@ -24,6 +24,12 @@ const LanguageOption = styled.li`
   padding: 5px;
   cursor: pointer;
 
+  transition: color 0.1s;
+
+  &:hover {
+    color: #d3c092;
+  }
+
   @media only screen and (max-width: 1200px) {
     font-size: 16px;
   }
