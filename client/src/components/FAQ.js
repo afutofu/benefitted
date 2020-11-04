@@ -24,6 +24,10 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 600px) {
+    width: 70%;
+  }
 `;
 
 const QA = styled.div`
@@ -45,6 +49,7 @@ const Question = styled.h3`
   margin: 0;
   margin-bottom: 5px;
   font-weight: 600;
+  line-height: 1.5em;
 `;
 
 const Answer = styled.p`

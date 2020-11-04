@@ -11,6 +11,7 @@ const BookSlotComp = styled.section`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  box-sizing: border-box;
 
   @media only screen and (max-width: 992px) {
     padding: 15vh 0;
@@ -22,6 +23,16 @@ const Container = styled.div`
   width: 90%;
   height: 100%;
   display: flex;
+  padding-left: 8px;
+  box-sizing: border-box;
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+
+  @media only screen and (max-width: 450px) {
+    width: 80%;
+  }
 `;
 
 const Slots = styled.div`
@@ -31,13 +42,20 @@ const Slots = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  box-sizing: border-box;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0;
+  }
 `;
 
 const Slot = styled.div`
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border: 1px solid #707070;
-  border-radius: 15px;
+  border-radius: 12px;
   margin-right: 20px;
   margin-bottom: 20px;
 
@@ -48,29 +66,56 @@ const Slot = styled.div`
     margin-right: 15px;
     margin-bottom: 15px;
   }
+
+  @media only screen and (max-width: 600px) {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    margin: 5px;
+  }
+
+  @media only screen and (max-width: 450px) {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+  }
 `;
 
 const InfoArea = styled.div`
   width: 35%;
   height: 100%;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const InfoTitle = styled.h3`
   font-size: 26px;
   margin: 0;
+  margin-bottom: 20px;
 
   @media only screen and (max-width: 992px) {
     font-size: 20px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    margin-bottom: 10px;
   }
 `;
 
 const InfoText = styled.p`
   font-size: 16px;
   line-height: 1.5em;
+  margin: 0;
   margin-bottom: 20px;
 
   @media only screen and (max-width: 992px) {
     font-size: 14px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    margin-bottom: 7px;
   }
 `;
 

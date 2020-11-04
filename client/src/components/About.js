@@ -12,6 +12,9 @@ const AboutComp = styled.section`
   height: 100%;
   padding: 20vh 0;
   padding-top: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media only screen and (max-width: 992px) {
     padding: 15vh 0;
@@ -22,7 +25,6 @@ const AboutComp = styled.section`
 const Container = styled.div`
   width: 90%;
   height: 100%;
-  margin: 0 5%;
   padding: 0 9px;
   display: flex;
   justify-content: space-between;
@@ -32,6 +34,10 @@ const Container = styled.div`
   @media only screen and (max-width: 768px) {
     flex-direction: column;
   }
+
+  @media only screen and (max-width: 450px) {
+    width: 80%;
+  }
 `;
 
 const Pair = styled.div`
@@ -39,7 +45,7 @@ const Pair = styled.div`
   align-items: center;
 
   @media only screen and (max-width: 768px) {
-    margin-bottom: 150px;
+    margin-bottom: 180px;
   }
 
   &:last-of-type {
@@ -67,6 +73,21 @@ const Image = styled.img.attrs((props) => ({
     width: 200px;
     height: 500px;
   }
+
+  @media only screen and (max-width: 600px) {
+    width: 180px;
+    height: 400px;
+  }
+
+  @media only screen and (max-width: 450px) {
+    width: 120px;
+    height: 350px;
+  }
+
+  @media only screen and (max-width: 350px) {
+    width: 100px;
+    height: 300px;
+  }
 `;
 
 const Text = styled.p`
@@ -91,6 +112,16 @@ const Text = styled.p`
   @media only screen and (max-width: 768px) {
     width: 100%;
     font-size: 16px;
+    padding: 15px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 14px;
+  }
+
+  @media only screen and (max-width: 350px) {
+    font-size: 12px;
+    line-height: 1.6em;
   }
 `;
 
@@ -138,6 +169,14 @@ const IntroShadow = styled.div`
   @media only screen and (max-width: 768px) {
     font-size: 35px;
   }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 30px;
+  }
+
+  @media only screen and (max-width: 350px) {
+    font-size: 25px;
+  }
 `;
 
 const IntroText = styled.h1`
@@ -161,6 +200,14 @@ const IntroText = styled.h1`
   @media only screen and (max-width: 768px) {
     font-size: 35px;
   }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 30px;
+  }
+
+  @media only screen and (max-width: 350px) {
+    font-size: 25px;
+  }
 `;
 
 const TitleShadow = styled.div`
@@ -181,6 +228,14 @@ const TitleShadow = styled.div`
 
   @media only screen and (max-width: 768px) {
     font-size: 50px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 40px;
+  }
+
+  @media only screen and (max-width: 350px) {
+    font-size: 35px;
   }
 `;
 
@@ -204,6 +259,14 @@ const TitleText = styled.h1`
   @media only screen and (max-width: 768px) {
     font-size: 50px;
   }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 40px;
+  }
+
+  @media only screen and (max-width: 350px) {
+    font-size: 35px;
+  }
 `;
 
 const Motto = styled.h2`
@@ -220,6 +283,14 @@ const Motto = styled.h2`
 
   @media only screen and (max-width: 768px) {
     font-size: 14px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 11px;
+  }
+
+  @media only screen and (max-width: 350px) {
+    font-size: 10px;
   }
 `;
 

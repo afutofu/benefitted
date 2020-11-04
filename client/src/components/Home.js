@@ -33,6 +33,9 @@ const ContainerWrapper = styled.div`
   scrollbar-width: none;
   padding-bottom: 20px;
   box-sizing: content-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Container = styled.div`
@@ -40,12 +43,15 @@ const Container = styled.div`
   height: 100%;
   padding: 35px 9px;
   padding-bottom: calc(35px - 20px);
-  margin: 0 5%;
   display: flex;
   /* flex-direction: column; */
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
+
+  @media only screen and (max-width: 450px) {
+    width: 80%;
+  }
 `;
 
 const Image = styled.div`
@@ -55,6 +61,16 @@ const Image = styled.div`
   margin-right: 50px;
   transform-origin: center center;
   /* margin-bottom: 50px; */
+
+  @media only screen and (max-width: 600px) {
+    min-width: 45vh;
+    min-height: 45vh;
+  }
+
+  @media only screen and (max-width: 450px) {
+    min-width: 35vh;
+    min-height: 35vh;
+  }
 `;
 
 const Prompt = styled.div`

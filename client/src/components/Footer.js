@@ -10,6 +10,9 @@ const FooterComp = styled.div`
   box-sizing: border-box;
   background-color: #e2d6c0;
   border-top: 1px solid #d3c092;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Container = styled.div`
@@ -21,6 +24,19 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   color: rgba(0, 0, 0, 0.3);
+  cursor: default;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    justify-content: space-between;
+  }
+
+  @media only screen and (max-width: 450px) {
+    width: 80%;
+  }
 
   i {
     position: absolute;
@@ -45,9 +61,7 @@ const Footer = () => {
     <FooterComp>
       <Container>
         &#169; 2020 Benefitted. All rights reserved
-        {isAdmin ? (
-          <p>Admin</p>
-        ) : (
+        {!isAdmin && (
           <i
             className="fas fa-sign-in-alt"
             onClick={() => setModalOpen(true)}

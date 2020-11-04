@@ -80,6 +80,10 @@ const AdminBox = styled.div`
   box-sizing: border-box;
   z-index: 300;
   border-radius: 10px;
+
+  @media only screen and (max-width: 450px) {
+    width: 250px;
+  }
 `;
 
 const Container = styled.div`
@@ -110,7 +114,6 @@ const ErrorMessage = styled.p`
 `;
 
 const Input = styled.input.attrs((props) => ({
-  placeholder: "Admin Password",
   type: "password",
 }))`
   position: relative;
@@ -127,6 +130,7 @@ const Input = styled.input.attrs((props) => ({
   font-family: "Montserrat", "san-serif";
   margin: 0;
   margin-bottom: 20px;
+  letter-spacing: 7px;
 `;
 
 const ButtonContainer = styled.div`
@@ -156,15 +160,14 @@ const ButtonContainer = styled.div`
 const LoginButton = styled.button`
   border: none;
   outline: none;
-  /* background-color: #e9e8e3; */
-  background: ${(props) => (props.success ? "#0eb514" : "#e9e8e3")};
+  background: ${(props) => (props.success ? "#11d111" : "#e9e8e3")};
   pointer-events: ${(props) => (props.success ? "none" : "auto")};
   color: #222;
   margin-right: 20px;
 
   transition: 0.2s;
   :hover {
-    background: ${(props) => (props.success ? "#0eb514" : "white")};
+    background: ${(props) => (props.success ? "#11d111" : "white")};
   }
 `;
 
@@ -199,7 +202,7 @@ const AdminModal = () => {
         setSuccess(true);
         setTimeout(() => {
           setModalOpen(false);
-        }, 500);
+        }, 1000);
       })
       .catch((err) => {
         setPassword("");
@@ -209,10 +212,15 @@ const AdminModal = () => {
       });
   };
 
+  const closeModal = () => {
+    setPassword("");
+    setModalOpen(false);
+  };
+
   if (!firstRender) {
     return (
       <AdminModalComp modalOpen={modalOpen} firstRender={firstRender}>
-        <Backdrop onClick={() => setModalOpen(false)} />
+        <Backdrop onClick={() => closeModal(false)} />
         <AdminBox>
           <Container>
             <Title>admin login</Title>
@@ -228,9 +236,9 @@ const AdminModal = () => {
           </Container>
           <ButtonContainer>
             <LoginButton onClick={() => login(password)} success={success}>
-              {success ? "Friend Request Sent" : "Send Friend Request"}
+              {success ? "Success" : "Login"}
             </LoginButton>
-            <CancelButton onClick={() => setModalOpen(false)}>
+            <CancelButton onClick={() => closeModal(false)}>
               Cancel
             </CancelButton>
           </ButtonContainer>
