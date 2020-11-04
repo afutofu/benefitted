@@ -137,7 +137,7 @@ const InfoText = styled.p`
 `;
 
 const BookSlot = () => {
-  const [slotsBooked, setSlotsBooked] = useState([]);
+  const [bookedSlots, setBookedSlots] = useState([]);
   const [language] = useContext(LanguageContext);
   const { admin } = useContext(AdminContext);
 
@@ -153,7 +153,7 @@ const BookSlot = () => {
     axios
       .get(`/api/slotDate/${year}/${monthIndex}`)
       .then((res) => {
-        setSlotsBooked([...res.data]);
+        setBookedSlots([...res.data]);
       })
       .catch();
   }, [year, monthIndex]);
@@ -220,18 +220,14 @@ const BookSlot = () => {
     }
   };
 
-  // Month here is 1-indexed (January is 1, February is 2, etc). This is
-  // because we're using 0 as the day so that it returns the last day
-  // of the last month, so you have to add 1 to the month number
-  // so it returns the correct amount of days
   const daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
 
+  // Check if date is booked
   const isBooked = (day) => {
     let booked = false;
-
-    slotsBooked.forEach((bookedSlot) => {
+    bookedSlots.forEach((bookedSlot) => {
       if (bookedSlot.day === day) {
         booked = true;
       }
@@ -247,22 +243,40 @@ const BookSlot = () => {
   const bookSlot = (day) => {
     if (isAdmin) {
       axios
-        .post("/api/slotDate", { day })
+        .post("/api/slotDate", { year, month: monthIndex, day })
         .then((res) => {
-          setSlotsBooked((slotsBooked) => [...slotsBooked, res.data]);
+          setBookedSlots((bookedSlots) => [...bookedSlots, res.data]);
+        })
+        .catch();
+    }
+  };
+
+  const deleteBookedSlot = (day) => {
+    if (isAdmin) {
+      axios
+        .delete(`/api/slotDate/${year}/${monthIndex}/${day}`)
+        .then(() => {
+          setBookedSlots(
+            bookedSlots.filter((bookedSlot) => bookedSlot.day !== day)
+          );
         })
         .catch();
     }
   };
 
   let slots = [];
-  console.log(slotsBooked);
   for (let day = 1; day <= numDays; day++) {
     slots.push(
       <Slot
         key={day}
         isAdmin={isAdmin}
-        onClick={() => bookSlot(day)}
+        onClick={() => {
+          if (isBooked(day)) {
+            deleteBookedSlot(day);
+          } else {
+            bookSlot(day);
+          }
+        }}
         booked={isBooked(day)}
       >
         {day}

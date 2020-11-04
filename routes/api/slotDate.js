@@ -27,15 +27,38 @@ router.get("/:year/:month", (req, res) => {
 // @desc    Authenticate admin
 // @access  Private
 router.post("/", (req, res) => {
-  const { day } = req.body;
+  const { year, month, day } = req.body;
 
-  const newSlotDate = new SlotDate({ day });
+  SlotDate.findOne({ year, month, day }, (err, foundSlotDate) => {
+    if (err) return res.status(500).json({ msg: "Error finding slot date" });
 
-  newSlotDate.save((err) => {
+    if (foundSlotDate)
+      return res
+        .status(400)
+        .json({ msg: "There is already a slot for that date" });
+
+    const newSlotDate = new SlotDate({ day });
+
+    newSlotDate.save((err) => {
+      if (err)
+        return res.status(500).json({ msg: "Could not create new slot date" });
+
+      res.send(newSlotDate);
+    });
+  });
+});
+
+// @route   POST /api/slotDate/:year/:month/:day
+// @desc    Authenticate admin
+// @access  Private
+router.delete("/:year/:month/:day", (req, res) => {
+  const { year, month, day } = req.params;
+
+  SlotDate.deleteOne({ year, month, day }, (err, deletedSlotDate) => {
     if (err)
-      return res.status(500).json({ msg: "Could not create new slot date" });
+      return res.status(500).json({ msg: "Error in deleting slot date" });
 
-    res.send(newSlotDate);
+    res.send(deletedSlotDate);
   });
 });
 
