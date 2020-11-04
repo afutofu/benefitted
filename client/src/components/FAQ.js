@@ -155,7 +155,7 @@ const FAQ = () => {
   const [language] = useContext(LanguageContext);
 
   return (
-    <FAQComp>
+    <FAQComp id="faq">
       <Container>
         {qas.map((qa, i) => {
           return (

@@ -143,7 +143,7 @@ const BottomArea = styled.div`
 
 const Home = () => {
   return (
-    <HomeComp>
+    <HomeComp id="home">
       <Gallery>
         <ContainerWrapper>
           <Container>

@@ -204,7 +204,7 @@ const BookSlot = () => {
   }
 
   return (
-    <BookSlotComp>
+    <BookSlotComp id="bookslot">
       <Container>
         <Slots>{slots}</Slots>
         <InfoArea>

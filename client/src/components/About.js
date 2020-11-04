@@ -306,74 +306,73 @@ const About = () => {
     setWidth(window.innerWidth);
   };
 
-  if (width < 768) {
-    return (
-      <AboutComp>
-        <Container>
-          <Logo>
-            <LogoImage src={logo} />
-            <IntroShadow>
-              introducing
-              <IntroText>introducing</IntroText>
-            </IntroShadow>
-            <TitleShadow>
-              benefitted
-              <TitleText>benefitted</TitleText>
-            </TitleShadow>
-            <Motto>custom wear and thrifted goods</Motto>
-          </Logo>
-          <Pair>
-            <Image src={vision} />
-            <Text>
-              {language === "english"
-                ? "Society working together, keeping in mind what's best, both for the community and the environment."
-                : "Masyarakat bekerja sama, dengan memperhatikan yang terbaik, baik untuk masyarakat maupun lingkungan."}
-            </Text>
-          </Pair>
-          <Pair>
-            <Text>
-              {language === "english"
-                ? "To provide an engaging, fun, and artistic solution to combat fast fashion and its various impacts on the environment."
-                : "Memberikan solusi yang menarik, menyenangkan, dan artistik untuk memerangi fast fashion dan berbagai dampaknya terhadap lingkungan."}
-            </Text>
-            <Image src={mission} />
-          </Pair>
-        </Container>
-      </AboutComp>
-    );
-  }
-
   return (
-    <AboutComp>
+    <AboutComp id="about">
       <Container>
-        <Pair>
-          <Image src={vision} />
-          <Text>
-            {language === "english"
-              ? "Society working together, keeping in mind what's best, both for the community and the environment."
-              : "Masyarakat bekerja sama, dengan memperhatikan yang terbaik, baik untuk masyarakat maupun lingkungan."}
-          </Text>
-        </Pair>
-        <Logo>
-          <LogoImage src={logo} />
-          <IntroShadow>
-            introducing
-            <IntroText>introducing</IntroText>
-          </IntroShadow>
-          <TitleShadow>
-            benefitted
-            <TitleText>benefitted</TitleText>
-          </TitleShadow>
-          <Motto>custom wear and thrifted goods</Motto>
-        </Logo>
-        <Pair>
-          <Text>
-            {language === "english"
-              ? "To provide an engaging, fun, and artistic solution to combat fast fashion and its various impacts on the environment."
-              : "Memberikan solusi yang menarik, menyenangkan, dan artistik untuk memerangi fast fashion dan berbagai dampaknya terhadap lingkungan."}
-          </Text>
-          <Image src={mission} />
-        </Pair>
+        {width < 768 ? (
+          <React.Fragment>
+            {" "}
+            <Logo>
+              <LogoImage src={logo} />
+              <IntroShadow>
+                introducing
+                <IntroText>introducing</IntroText>
+              </IntroShadow>
+              <TitleShadow>
+                benefitted
+                <TitleText>benefitted</TitleText>
+              </TitleShadow>
+              <Motto>custom wear and thrifted goods</Motto>
+            </Logo>
+            <Pair>
+              <Image src={vision} />
+              <Text>
+                {language === "english"
+                  ? "Society working together, keeping in mind what's best, both for the community and the environment."
+                  : "Masyarakat bekerja sama, dengan memperhatikan yang terbaik, baik untuk masyarakat maupun lingkungan."}
+              </Text>
+            </Pair>
+            <Pair>
+              <Text>
+                {language === "english"
+                  ? "To provide an engaging, fun, and artistic solution to combat fast fashion and its various impacts on the environment."
+                  : "Memberikan solusi yang menarik, menyenangkan, dan artistik untuk memerangi fast fashion dan berbagai dampaknya terhadap lingkungan."}
+              </Text>
+              <Image src={mission} />
+            </Pair>{" "}
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <Pair>
+              <Image src={vision} />
+              <Text>
+                {language === "english"
+                  ? "Society working together, keeping in mind what's best, both for the community and the environment."
+                  : "Masyarakat bekerja sama, dengan memperhatikan yang terbaik, baik untuk masyarakat maupun lingkungan."}
+              </Text>
+            </Pair>
+            <Logo>
+              <LogoImage src={logo} />
+              <IntroShadow>
+                introducing
+                <IntroText>introducing</IntroText>
+              </IntroShadow>
+              <TitleShadow>
+                benefitted
+                <TitleText>benefitted</TitleText>
+              </TitleShadow>
+              <Motto>custom wear and thrifted goods</Motto>
+            </Logo>
+            <Pair>
+              <Text>
+                {language === "english"
+                  ? "To provide an engaging, fun, and artistic solution to combat fast fashion and its various impacts on the environment."
+                  : "Memberikan solusi yang menarik, menyenangkan, dan artistik untuk memerangi fast fashion dan berbagai dampaknya terhadap lingkungan."}
+              </Text>
+              <Image src={mission} />
+            </Pair>
+          </React.Fragment>
+        )}
       </Container>
     </AboutComp>
   );

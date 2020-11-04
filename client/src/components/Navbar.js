@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-scroll";
 
 import LanguagePicker from "./LanguagePicker";
 
@@ -32,7 +33,7 @@ const Backdrop = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: -100;
   transition: transform 0.4s ease-out;
   transform: ${(props) =>
@@ -87,6 +88,7 @@ const NavItems = styled.ul`
   list-style: none;
   display: flex;
   align-items: center;
+  z-index: 50;
 
   @media only screen and (max-width: 600px) {
     position: absolute;
@@ -132,7 +134,20 @@ const Navbar = () => {
   return (
     <NavbarComp>
       <Container>
-        <Title>bnftd.</Title>
+        <Title>
+          <Link
+            to="home"
+            smooth={true}
+            duration={1000}
+            onClick={() => {
+              setTimeout(() => {
+                setNavOpen(false);
+              }, 100);
+            }}
+          >
+            bnftd.
+          </Link>
+        </Title>
         <Hamburger onClick={() => setNavOpen(!navOpen)} navOpen={navOpen}>
           {navOpen ? (
             <i className="fas fa-times"></i>
@@ -142,9 +157,48 @@ const Navbar = () => {
         </Hamburger>
         <Backdrop navOpen={navOpen} />
         <NavItems navOpen={navOpen}>
-          <NavItem onClick={() => setNavOpen(false)}>about</NavItem>
-          <NavItem onClick={() => setNavOpen(false)}>faq</NavItem>
-          <NavItem onClick={() => setNavOpen(false)}>book slot</NavItem>
+          <NavItem>
+            <Link
+              to="about"
+              smooth={true}
+              duration={1000}
+              onClick={() => {
+                setTimeout(() => {
+                  setNavOpen(false);
+                }, 100);
+              }}
+            >
+              about
+            </Link>
+          </NavItem>
+          <NavItem>
+            <Link
+              to="faq"
+              smooth={true}
+              duration={1000}
+              onClick={() => {
+                setTimeout(() => {
+                  setNavOpen(false);
+                }, 100);
+              }}
+            >
+              faq
+            </Link>
+          </NavItem>
+          <NavItem>
+            <Link
+              to="bookslot"
+              smooth={true}
+              duration={1000}
+              onClick={() => {
+                setTimeout(() => {
+                  setNavOpen(false);
+                }, 100);
+              }}
+            >
+              book slot
+            </Link>
+          </NavItem>
           <LanguagePicker setNavOpen={setNavOpen} />
         </NavItems>
       </Container>
