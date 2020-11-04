@@ -19,7 +19,7 @@ const LanguagePickerComp = styled.ul`
 const LanguageOption = styled.li`
   position: relative;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   padding: 5px;
   cursor: pointer;
@@ -35,13 +35,19 @@ const LanguageOption = styled.li`
   @media only screen and (max-width: 768px) {
     font-size: 12px;
   }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 20px;
+    color: white;
+    margin-bottom: 30px;
+  }
 `;
 
 const Separator = styled.p`
   margin: 0 5px;
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: 16px;
 
   @media only screen and (max-width: 1200px) {
     font-size: 16px;
@@ -54,6 +60,12 @@ const Separator = styled.p`
 
   @media only screen and (max-width: 768px) {
     font-size: 12px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 20px;
+    color: white;
+    margin-bottom: 30px;
   }
 `;
 
@@ -72,19 +84,37 @@ const Underline = styled.div`
   background-color: #d3c092;
 `;
 
-const LanguagePicker = () => {
+const LanguagePicker = (props) => {
   const [language, setLanguage] = useContext(LanguageContext);
 
   return (
     <LanguagePickerComp>
-      <LanguageOption onClick={() => setLanguage("english")}>
+      <LanguageOption
+        onClick={() => {
+          setLanguage("english");
+          if (language === "indonesian") {
+            setTimeout(() => {
+              props.setNavOpen(false);
+            }, 200);
+          }
+        }}
+      >
         en
         <UnderlineWrapper selected={language === "english"}>
           <Underline />
         </UnderlineWrapper>
       </LanguageOption>
       <Separator>/</Separator>
-      <LanguageOption onClick={() => setLanguage("indonesian")}>
+      <LanguageOption
+        onClick={() => {
+          setLanguage("indonesian");
+          if (language === "english") {
+            setTimeout(() => {
+              props.setNavOpen(false);
+            }, 200);
+          }
+        }}
+      >
         id
         <UnderlineWrapper selected={language === "indonesian"}>
           <Underline />
