@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
     return res.status(400).json({ msg: "Invalid credentials" });
   }
 
-  jwt.sign({}, process.env.JWT_KEY, { expiresIn: 3600 }, (err, token) => {
+  jwt.sign({}, process.env.JWT_KEY, { expiresIn: 180 }, (err, token) => {
     if (err) throw err;
 
     res.json({
@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
 // @desc    Get user data
 // @access  Private
 router.get("/admin", auth, (req, res) => {
-  jwt.sign({}, process.env.JWT_KEY, { expiresIn: 3600 }, (err, token) => {
+  jwt.sign({}, process.env.JWT_KEY, { expiresIn: 180 }, (err, token) => {
     if (err) throw err;
 
     res.json({
