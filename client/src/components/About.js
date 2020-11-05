@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import styled from "styled-components";
 import { gsap, TimelineLite, Power3 } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -347,7 +347,6 @@ const Motto = styled.h2`
 
 const About = () => {
   const [language] = useContext(LanguageContext);
-  const [width, setWidth] = useState(window.innerWidth);
 
   let logo = useRef(null);
   let visionImage = useRef(null);
@@ -366,7 +365,9 @@ const About = () => {
 
     tl.from(logo, {
       autoAlpha: 0,
-      duration: 2,
+      y: 40,
+      duration: 1,
+      ease: Power3.easeOut,
     });
 
     return tl;
@@ -431,17 +432,10 @@ const About = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("resize", updateDimensions);
-
-    let master = new TimelineLite();
-    master.add(logoEnter);
-    master.add(visionEnter);
-    master.add(missionEnter);
+    logoEnter();
+    visionEnter();
+    missionEnter();
   }, []);
-
-  const updateDimensions = () => {
-    setWidth(window.innerWidth);
-  };
 
   return (
     <AboutComp id="about">

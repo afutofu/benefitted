@@ -1,8 +1,12 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext, useMemo } from "react";
 import styled from "styled-components";
 import parse from "react-html-parser";
+import { gsap, TimelineLite, Power3 } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { LanguageContext } from "../contexts/LanguageContext";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const FAQComp = styled.section`
   width: 100%;
@@ -152,14 +156,39 @@ const qas = [
 ];
 
 const FAQ = () => {
+  let qaRefs = useMemo(() => [], []);
   const [language] = useContext(LanguageContext);
+
+  const qaEnter = (qaRef) => {
+    let tl = new TimelineLite({
+      scrollTrigger: {
+        trigger: qaRef,
+        toggleActions: "play none none none",
+        start: "top center",
+      },
+    });
+
+    tl.from(qaRef, {
+      autoAlpha: 0,
+      duration: 0.3,
+      ease: Power3.easeOut,
+    });
+
+    return tl;
+  };
+
+  useEffect(() => {
+    qaRefs.forEach((qaRef) => {
+      qaEnter(qaRef);
+    });
+  }, [qaRefs]);
 
   return (
     <FAQComp id="faq">
       <Container>
         {qas.map((qa, i) => {
           return (
-            <QA key={i}>
+            <QA key={i} ref={(el) => (qaRefs[i] = el)}>
               <Question>
                 {language === "english" ? qa.question : qa.questionIndo}
               </Question>
