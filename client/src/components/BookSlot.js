@@ -25,6 +25,7 @@ const Container = styled.div`
   width: 90%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   padding-left: 8px;
   box-sizing: border-box;
 
@@ -34,6 +35,52 @@ const Container = styled.div`
 
   @media only screen and (max-width: 450px) {
     width: 80%;
+  }
+`;
+
+const InfoTitle = styled.h3`
+  position: relative;
+  font-size: 35px;
+  margin: 0;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+
+  @media only screen and (max-width: 992px) {
+    font-size: 35px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    margin-bottom: 10px;
+  }
+`;
+
+const LineWrapper = styled.div`
+  top: 50%;
+  margin-left: 10px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media only screen and (max-width: 600px) {
+    width: 50px;
+  }
+`;
+
+const Line = styled.div`
+  width: 100%;
+  height: 3px;
+  background-color: black;
+`;
+
+const SlotInfoArea = styled.div`
+  width: 100%;
+  display: flex;
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
   }
 `;
 
@@ -107,20 +154,6 @@ const InfoArea = styled.div`
   }
 `;
 
-const InfoTitle = styled.h3`
-  font-size: 26px;
-  margin: 0;
-  margin-bottom: 20px;
-
-  @media only screen and (max-width: 992px) {
-    font-size: 20px;
-  }
-
-  @media only screen and (max-width: 600px) {
-    margin-bottom: 10px;
-  }
-`;
-
 const InfoText = styled.p`
   font-size: 16px;
   line-height: 1.5em;
@@ -169,7 +202,9 @@ const BookSlot = () => {
       .then((res) => {
         setBookedSlots([...res.data]);
       })
-      .catch();
+      .catch((err) => {
+        console.log(err.response.data.msg);
+      });
   }, [year, monthIndex, setIsAdmin]);
 
   const getMonthName = (monthIndex) => {
@@ -267,7 +302,11 @@ const BookSlot = () => {
         .then((res) => {
           setBookedSlots((bookedSlots) => [...bookedSlots, res.data]);
         })
-        .catch();
+        .catch((err) => {
+          localStorage.removeItem("token");
+          setIsAdmin(false);
+          console.log(err.response.data.msg);
+        });
     }
   };
 
@@ -285,7 +324,11 @@ const BookSlot = () => {
             bookedSlots.filter((bookedSlot) => bookedSlot.day !== day)
           );
         })
-        .catch();
+        .catch((err) => {
+          localStorage.removeItem("token");
+          setIsAdmin(false);
+          console.log(err.response.data.msg);
+        });
     }
   };
 
@@ -312,29 +355,36 @@ const BookSlot = () => {
   return (
     <BookSlotComp id="bookslot">
       <Container>
-        <Slots>
-          {slots.map((slot) => {
-            return slot;
-          })}
-        </Slots>
-        <InfoArea>
-          <InfoTitle>{monthName}</InfoTitle>
-          <InfoText>
-            {language === "english"
-              ? "We're not open all the time, these are our available slots for now."
-              : "Kami tidak buka setiap saat, ini adalah slot yang tersedia untuk saat ini."}
-          </InfoText>
-          <InfoText>
-            {language === "english"
-              ? "Look at the empty slots and send us a DM on Instagram."
-              : "Lihat slot kosong dan kirimkan DM di Instagram."}
-          </InfoText>
-          <InfoText>
-            {language === "english"
-              ? "We'll get back to you as soon as we can."
-              : "Kami akan menghubungi Anda kembali secepat kami bisa."}
-          </InfoText>
-        </InfoArea>
+        <InfoTitle>
+          {monthName}
+          <LineWrapper>
+            <Line />
+          </LineWrapper>
+        </InfoTitle>
+        <SlotInfoArea>
+          <Slots>
+            {slots.map((slot) => {
+              return slot;
+            })}
+          </Slots>
+          <InfoArea>
+            <InfoText>
+              {language === "english"
+                ? "We're not open all the time, these are our available slots for now."
+                : "Kami tidak buka setiap saat, ini adalah slot yang tersedia untuk saat ini."}
+            </InfoText>
+            <InfoText>
+              {language === "english"
+                ? "Look at the empty slots and send us a DM on Instagram."
+                : "Lihat slot kosong dan kirimkan DM di Instagram."}
+            </InfoText>
+            <InfoText>
+              {language === "english"
+                ? "We'll get back to you as soon as we can."
+                : "Kami akan menghubungi Anda kembali secepat kami bisa."}
+            </InfoText>
+          </InfoArea>
+        </SlotInfoArea>
       </Container>
     </BookSlotComp>
   );
