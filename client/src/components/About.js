@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import styled from "styled-components";
+import { gsap, TimelineLite, Power3 } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import logo from "../assets/logo.png";
+import logoImg from "../assets/logo.png";
 import vision from "../assets/vision.png";
 import mission from "../assets/mission.png";
 
 import { LanguageContext } from "../contexts/LanguageContext";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AboutComp = styled.section`
   width: 100%;
@@ -15,6 +19,7 @@ const AboutComp = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 
   @media only screen and (max-width: 992px) {
     padding: 15vh 0;
@@ -31,8 +36,52 @@ const Container = styled.div`
   align-items: center;
   box-sizing: border-box;
 
+  & :nth-child(1) {
+    order: 2;
+
+    & :nth-child(1) {
+      order: 1;
+    }
+
+    & :nth-child(2) {
+      order: 2;
+    }
+
+    & :nth-child(3) {
+      order: 3;
+    }
+
+    & :nth-child(4) {
+      order: 4;
+    }
+  }
+  & :nth-child(2) {
+    order: 1;
+    flex-direction: row-reverse;
+  }
+  & :nth-child(3) {
+    order: 3;
+    flex-direction: row-reverse;
+  }
+
   @media only screen and (max-width: 768px) {
     flex-direction: column;
+
+    & :nth-child(1) {
+      order: 1;
+
+      & :nth-child(4) {
+        order: 4;
+      }
+    }
+    & :nth-child(2) {
+      order: 2;
+      flex-direction: row;
+    }
+    & :nth-child(3) {
+      order: 3;
+      flex-direction: row;
+    }
   }
 
   @media only screen and (max-width: 450px) {
@@ -58,6 +107,7 @@ const Image = styled.img.attrs((props) => ({
 }))`
   width: 200px;
   height: 500px;
+  z-index: 50;
 
   @media only screen and (max-width: 1200px) {
     width: 150px;
@@ -96,6 +146,7 @@ const Text = styled.p`
   line-height: 2em;
   font-size: 16px;
   text-align: center;
+  z-index: 10;
 
   @media only screen and (max-width: 1200px) {
     width: 100px;
@@ -298,8 +349,94 @@ const About = () => {
   const [language] = useContext(LanguageContext);
   const [width, setWidth] = useState(window.innerWidth);
 
+  let logo = useRef(null);
+  let visionImage = useRef(null);
+  let visionText = useRef(null);
+  let missionImage = useRef(null);
+  let missionText = useRef(null);
+
+  const logoEnter = () => {
+    let tl = new TimelineLite({
+      scrollTrigger: {
+        trigger: logo,
+        start: "top center",
+        toggleActions: "play none none none",
+      },
+    });
+
+    tl.from(logo, {
+      autoAlpha: 0,
+      duration: 2,
+    });
+
+    return tl;
+  };
+
+  const visionEnter = () => {
+    let tl = new TimelineLite({
+      scrollTrigger: {
+        trigger: visionImage,
+        start: "top center",
+        toggleActions: "play none none none",
+      },
+    });
+
+    tl.from(visionImage, {
+      x: -50,
+      autoAlpha: 0,
+      duration: 1.2,
+      zIndex: 20,
+      ease: Power3.easeOut,
+    }).from(
+      visionText,
+      {
+        x: 50,
+        autoAlpha: 0,
+        duration: 1.2,
+        zIndex: 0,
+        ease: Power3.easeOut,
+      },
+      "-=1.2"
+    );
+
+    return tl;
+  };
+
+  const missionEnter = () => {
+    let tl = new TimelineLite({
+      scrollTrigger: {
+        trigger: missionImage,
+        start: "top center",
+        toggleActions: "play none none none",
+      },
+    });
+
+    tl.from(missionImage, {
+      x: 50,
+      autoAlpha: 0,
+      duration: 1.2,
+      ease: Power3.easeOut,
+    }).from(
+      missionText,
+      {
+        x: -50,
+        autoAlpha: 0,
+        duration: 1.2,
+        ease: Power3.easeOut,
+      },
+      "-=1.2"
+    );
+
+    return tl;
+  };
+
   useEffect(() => {
     window.addEventListener("resize", updateDimensions);
+
+    let master = new TimelineLite();
+    master.add(logoEnter);
+    master.add(visionEnter);
+    master.add(missionEnter);
   }, []);
 
   const updateDimensions = () => {
@@ -309,70 +446,34 @@ const About = () => {
   return (
     <AboutComp id="about">
       <Container>
-        {width < 768 ? (
-          <React.Fragment>
-            {" "}
-            <Logo>
-              <LogoImage src={logo} />
-              <IntroShadow>
-                introducing
-                <IntroText>introducing</IntroText>
-              </IntroShadow>
-              <TitleShadow>
-                benefitted
-                <TitleText>benefitted</TitleText>
-              </TitleShadow>
-              <Motto>custom wear and thrifted goods</Motto>
-            </Logo>
-            <Pair>
-              <Image src={vision} />
-              <Text>
-                {language === "english"
-                  ? "Society working together, keeping in mind what's best, both for the community and the environment."
-                  : "Masyarakat bekerja sama, dengan memperhatikan yang terbaik, baik untuk masyarakat maupun lingkungan."}
-              </Text>
-            </Pair>
-            <Pair>
-              <Text>
-                {language === "english"
-                  ? "To provide an engaging, fun, and artistic solution to combat fast fashion and its various impacts on the environment."
-                  : "Memberikan solusi yang menarik, menyenangkan, dan artistik untuk memerangi fast fashion dan berbagai dampaknya terhadap lingkungan."}
-              </Text>
-              <Image src={mission} />
-            </Pair>{" "}
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <Pair>
-              <Image src={vision} />
-              <Text>
-                {language === "english"
-                  ? "Society working together, keeping in mind what's best, both for the community and the environment."
-                  : "Masyarakat bekerja sama, dengan memperhatikan yang terbaik, baik untuk masyarakat maupun lingkungan."}
-              </Text>
-            </Pair>
-            <Logo>
-              <LogoImage src={logo} />
-              <IntroShadow>
-                introducing
-                <IntroText>introducing</IntroText>
-              </IntroShadow>
-              <TitleShadow>
-                benefitted
-                <TitleText>benefitted</TitleText>
-              </TitleShadow>
-              <Motto>custom wear and thrifted goods</Motto>
-            </Logo>
-            <Pair>
-              <Text>
-                {language === "english"
-                  ? "To provide an engaging, fun, and artistic solution to combat fast fashion and its various impacts on the environment."
-                  : "Memberikan solusi yang menarik, menyenangkan, dan artistik untuk memerangi fast fashion dan berbagai dampaknya terhadap lingkungan."}
-              </Text>
-              <Image src={mission} />
-            </Pair>
-          </React.Fragment>
-        )}
+        <Logo ref={(el) => (logo = el)}>
+          <LogoImage src={logoImg} />
+          <IntroShadow>
+            introducing
+            <IntroText>introducing</IntroText>
+          </IntroShadow>
+          <TitleShadow>
+            benefitted
+            <TitleText>benefitted</TitleText>
+          </TitleShadow>
+          <Motto>custom wear and thrifted goods</Motto>
+        </Logo>
+        <Pair>
+          <Image src={vision} ref={(el) => (visionImage = el)} />
+          <Text ref={(el) => (visionText = el)}>
+            {language === "english"
+              ? "Society working together, keeping in mind what's best, both for the community and the environment."
+              : "Masyarakat bekerja sama, dengan memperhatikan yang terbaik, baik untuk masyarakat maupun lingkungan."}
+          </Text>
+        </Pair>
+        <Pair>
+          <Text ref={(el) => (missionText = el)}>
+            {language === "english"
+              ? "To provide an engaging, fun, and artistic solution to combat fast fashion and its various impacts on the environment."
+              : "Memberikan solusi yang menarik, menyenangkan, dan artistik untuk memerangi fast fashion dan berbagai dampaknya terhadap lingkungan."}
+          </Text>
+          <Image src={mission} ref={(el) => (missionImage = el)} />
+        </Pair>
       </Container>
     </AboutComp>
   );
