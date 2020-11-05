@@ -18,7 +18,7 @@ const authRoutes = require("./routes/api/auth");
 const slotDateRoutes = require("./routes/api/slotDate");
 
 app.use("/api/auth", authRoutes);
-app.use("/api/slotDate", slotDateRoutes);
+app.use("/api/slotDates", slotDateRoutes);
 
 // CONNECT TO DB
 mongoose.connect(

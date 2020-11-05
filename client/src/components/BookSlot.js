@@ -141,22 +141,36 @@ const BookSlot = () => {
   const [language] = useContext(LanguageContext);
   const { admin } = useContext(AdminContext);
 
-  const { isAdmin } = admin;
+  const { isAdmin, setIsAdmin } = admin;
 
   const date = new Date();
 
   const monthIndex = date.getMonth() + 1;
   const year = date.getFullYear();
 
-  // Get all booked slot dates
+  // Get all booked slot dates and fetch admin if token is available
   useEffect(() => {
+    const config = {
+      headers: {
+        "x-auth-token": [localStorage.getItem("token")],
+      },
+    };
     axios
-      .get(`/api/slotDate/${year}/${monthIndex}`)
+      .get("/api/auth/admin", config)
+      .then(() => {
+        setIsAdmin(true);
+      })
+      .catch((err) => {
+        console.log(err.response.data.msg);
+      });
+
+    axios
+      .get(`/api/slotDates/${year}/${monthIndex}`)
       .then((res) => {
         setBookedSlots([...res.data]);
       })
       .catch();
-  }, [year, monthIndex]);
+  }, [year, monthIndex, setIsAdmin]);
 
   const getMonthName = (monthIndex) => {
     if (language === "english") {
@@ -242,8 +256,14 @@ const BookSlot = () => {
   // Book a slot date
   const bookSlot = (day) => {
     if (isAdmin) {
+      const config = {
+        headers: {
+          "x-auth-token": [localStorage.getItem("token")],
+        },
+      };
+
       axios
-        .post("/api/slotDate", { year, month: monthIndex, day })
+        .post("/api/slotDates", { year, month: monthIndex, day }, config)
         .then((res) => {
           setBookedSlots((bookedSlots) => [...bookedSlots, res.data]);
         })
@@ -253,8 +273,13 @@ const BookSlot = () => {
 
   const deleteBookedSlot = (day) => {
     if (isAdmin) {
+      const config = {
+        headers: {
+          "x-auth-token": [localStorage.getItem("token")],
+        },
+      };
       axios
-        .delete(`/api/slotDate/${year}/${monthIndex}/${day}`)
+        .delete(`/api/slotDates/${year}/${monthIndex}/${day}`, config)
         .then(() => {
           setBookedSlots(
             bookedSlots.filter((bookedSlot) => bookedSlot.day !== day)

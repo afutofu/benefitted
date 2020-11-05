@@ -197,7 +197,8 @@ const AdminModal = () => {
     setErrorMsg(null);
     axios
       .post("/api/auth", { password })
-      .then(() => {
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
         setIsAdmin(true);
         setSuccess(true);
         setTimeout(() => {

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
+const auth = require("../../middleware/auth");
 
 const SlotDate = require("../../models/SlotDate");
 
@@ -26,7 +27,7 @@ router.get("/:year/:month", (req, res) => {
 // @route   POST /api/slotDate
 // @desc    Authenticate admin
 // @access  Private
-router.post("/", (req, res) => {
+router.post("/", auth, (req, res) => {
   const { year, month, day } = req.body;
 
   SlotDate.findOne({ year, month, day }, (err, foundSlotDate) => {
@@ -51,7 +52,7 @@ router.post("/", (req, res) => {
 // @route   POST /api/slotDate/:year/:month/:day
 // @desc    Authenticate admin
 // @access  Private
-router.delete("/:year/:month/:day", (req, res) => {
+router.delete("/:year/:month/:day", auth, (req, res) => {
   const { year, month, day } = req.params;
 
   SlotDate.deleteOne({ year, month, day }, (err, deletedSlotDate) => {
