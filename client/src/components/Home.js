@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { TimelineLite, Power3 } from "gsap";
+import axios from "axios";
 
 const HomeComp = styled.section`
   position: relative;
@@ -67,9 +68,11 @@ const Container = styled.div`
   }
 `;
 
-const Image = styled.div`
-  min-width: 50vh;
-  min-height: 50vh;
+const Image = styled.img.attrs((props) => ({
+  src: props.src,
+}))`
+  width: 50vh;
+  height: 50vh;
   background-color: #e2d6c0;
   margin-right: 50px;
   transform-origin: center center;
@@ -157,6 +160,7 @@ const BottomArea = styled.div`
 const Home = () => {
   let galleryCover = useRef(null);
   let arrow = useRef(null);
+  const [posts, setPosts] = useState([]);
 
   const openGallery = () => {
     let tl = new TimelineLite({ delay: 1 });
@@ -182,9 +186,22 @@ const Home = () => {
   };
 
   useEffect(() => {
-    openGallery();
     arrowEnter();
+    axios
+      .get("/api/posts")
+      .then((res) => {
+        setPosts([...res.data]);
+      })
+      .catch((err) => {
+        console.log(err.response.data.msg);
+      });
   }, []);
+
+  useEffect(() => {
+    if (posts.length > 0) {
+      openGallery();
+    }
+  }, [posts.length]);
 
   return (
     <HomeComp id="home">
@@ -192,13 +209,9 @@ const Home = () => {
         <GalleryCover ref={(el) => (galleryCover = el)} />
         <ContainerWrapper>
           <Container>
-            <Image />
-            <Image />
-            <Image />
-            <Image />
-            <Image />
-            <Image />
-            <Image />
+            {posts.map((post) => {
+              return <Image key={post.id} src={post.media_url} />;
+            })}
             <Prompt>
               <a
                 href="https://www.instagram.com/benefitted.id/"

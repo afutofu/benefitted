@@ -16,9 +16,11 @@ app.use(express.json());
 // API ROUTES
 const authRoutes = require("./routes/api/auth");
 const slotDateRoutes = require("./routes/api/slotDate");
+const postRoutes = require("./routes/api/post");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/slotDates", slotDateRoutes);
+app.use("/api/posts", postRoutes);
 
 // CONNECT TO DB
 mongoose.connect(
