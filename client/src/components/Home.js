@@ -79,13 +79,13 @@ const Image = styled.img.attrs((props) => ({
   /* margin-bottom: 50px; */
 
   @media only screen and (max-width: 600px) {
-    min-width: 45vh;
-    min-height: 45vh;
+    width: 45vh;
+    height: 45vh;
   }
 
   @media only screen and (max-width: 450px) {
-    min-width: 35vh;
-    min-height: 35vh;
+    width: 35vh;
+    height: 35vh;
   }
 `;
 
