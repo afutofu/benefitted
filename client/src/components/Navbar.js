@@ -142,6 +142,7 @@ const Navbar = () => {
 
   let navbar = useRef(null);
   let title = useRef(null);
+  let burger = useRef(null);
   let about = useRef(null);
   let faq = useRef(null);
   let bookSlot = useRef(null);
@@ -164,8 +165,22 @@ const Navbar = () => {
     return tl;
   };
 
+  const burgerEnter = () => {
+    let tl = new TimelineLite({ delay: 2.2 });
+
+    tl.from(burger, {
+      y: -30,
+      autoAlpha: 0,
+      ease: Power3.easeOut,
+      durtation: 0.5,
+    });
+
+    return tl;
+  };
+
   useEffect(() => {
     navItemsEnter();
+    burgerEnter();
   }, []);
 
   // Make navbar hide and appear based on scrolling
@@ -219,7 +234,11 @@ const Navbar = () => {
             bnftd.
           </Link>
         </Title>
-        <Hamburger onClick={() => setNavOpen(!navOpen)} navOpen={navOpen}>
+        <Hamburger
+          onClick={() => setNavOpen(!navOpen)}
+          navOpen={navOpen}
+          ref={(el) => (burger = el)}
+        >
           {navOpen ? (
             <i className="fas fa-times"></i>
           ) : (
