@@ -3,6 +3,8 @@ import styled, { keyframes } from "styled-components";
 import { TimelineLite, Power3 } from "gsap";
 import axios from "axios";
 
+import RippleSpinner from "./RippleSpinner";
+
 const HomeComp = styled.section`
   position: relative;
   width: 100%;
@@ -37,6 +39,9 @@ const GalleryCover = styled.div`
   height: 100%;
   z-index: 100;
   background-color: #e9e8e3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ContainerWrapper = styled.div`
@@ -50,6 +55,7 @@ const ContainerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-overflow-scrolling: touch;
 `;
 
 const Container = styled.div`
@@ -146,6 +152,7 @@ const BottomArea = styled.div`
     position: relative;
     font-size: 25px;
     animation: ${upAndDown} 2.5s infinite;
+    opacity: 0;
 
     @media only screen and (max-width: 992px) {
       font-size: 20px;
@@ -161,9 +168,10 @@ const Home = () => {
   let galleryCover = useRef(null);
   let arrow = useRef(null);
   const [posts, setPosts] = useState([]);
+  const [postsLoading, setPostsLoading] = useState(true);
 
   const openGallery = () => {
-    let tl = new TimelineLite({ delay: 1 });
+    let tl = new TimelineLite();
 
     tl.to(galleryCover, {
       y: "-100%",
@@ -175,10 +183,10 @@ const Home = () => {
   };
 
   const arrowEnter = () => {
-    let tl = new TimelineLite({ delay: 2 });
+    let tl = new TimelineLite({ delay: 0.5 });
 
-    tl.from(arrow, {
-      autoAlpha: 0,
+    tl.to(arrow, {
+      autoAlpha: 1,
       duration: 1,
     });
 
@@ -186,11 +194,15 @@ const Home = () => {
   };
 
   useEffect(() => {
-    arrowEnter();
     axios
       .get("/api/posts")
       .then((res) => {
-        setPosts([...res.data]);
+        setTimeout(() => {
+          setPostsLoading(false);
+          setTimeout(() => {
+            setPosts([...res.data]);
+          }, 250);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err.response.data.msg);
@@ -199,6 +211,7 @@ const Home = () => {
 
   useEffect(() => {
     if (posts.length > 0) {
+      arrowEnter();
       openGallery();
     }
   }, [posts.length]);
@@ -206,7 +219,9 @@ const Home = () => {
   return (
     <HomeComp id="home">
       <Gallery>
-        <GalleryCover ref={(el) => (galleryCover = el)} />
+        <GalleryCover ref={(el) => (galleryCover = el)}>
+          {postsLoading && <RippleSpinner />}
+        </GalleryCover>
         <ContainerWrapper>
           <Container>
             {posts.map((post) => {
