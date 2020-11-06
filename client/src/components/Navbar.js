@@ -149,7 +149,7 @@ const Navbar = () => {
   let languagePicker = useRef(null);
 
   const navItemsEnter = () => {
-    let tl = new TimelineLite({ delay: 2 });
+    let tl = new TimelineLite();
 
     tl.staggerFrom(
       [title, about, faq, bookSlot, languagePicker],
@@ -166,7 +166,7 @@ const Navbar = () => {
   };
 
   const burgerEnter = () => {
-    let tl = new TimelineLite({ delay: 2.2 });
+    let tl = new TimelineLite({ delay: 0.2 });
 
     tl.from(burger, {
       y: -30,
