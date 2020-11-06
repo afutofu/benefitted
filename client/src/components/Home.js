@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
+import { TimelineLite, Power3 } from "gsap";
 
 const HomeComp = styled.section`
+  position: relative;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -15,6 +17,7 @@ const Gallery = styled.div`
   margin-top: 120px;
   background-color: rgba(255, 255, 255, 0.25);
   overflow: hidden;
+  z-index: 0;
 
   @media only screen and (max-width: 1200px) {
     margin-top: 100px;
@@ -23,6 +26,16 @@ const Gallery = styled.div`
   @media only screen and (max-width: 992px) {
     margin-top: 90px;
   }
+`;
+
+const GalleryCover = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: #e9e8e3;
 `;
 
 const ContainerWrapper = styled.div`
@@ -142,9 +155,41 @@ const BottomArea = styled.div`
 `;
 
 const Home = () => {
+  let galleryCover = useRef(null);
+  let arrow = useRef(null);
+
+  const openGallery = () => {
+    let tl = new TimelineLite({ delay: 1 });
+
+    tl.to(galleryCover, {
+      y: "-100%",
+      duration: 1,
+      ease: Power3.easeOut,
+    });
+
+    return tl;
+  };
+
+  const arrowEnter = () => {
+    let tl = new TimelineLite({ delay: 2 });
+
+    tl.from(arrow, {
+      autoAlpha: 0,
+      duration: 1,
+    });
+
+    return tl;
+  };
+
+  useEffect(() => {
+    openGallery();
+    arrowEnter();
+  }, []);
+
   return (
     <HomeComp id="home">
       <Gallery>
+        <GalleryCover ref={(el) => (galleryCover = el)} />
         <ContainerWrapper>
           <Container>
             <Image />
@@ -167,7 +212,7 @@ const Home = () => {
         </ContainerWrapper>
       </Gallery>
       <BottomArea>
-        <i className="fas fa-chevron-down"></i>
+        <i className="fas fa-chevron-down" ref={(el) => (arrow = el)}></i>
       </BottomArea>
     </HomeComp>
   );

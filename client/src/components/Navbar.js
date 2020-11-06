@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
+import { TimelineLite, Power3 } from "gsap";
 
 import LanguagePicker from "./LanguagePicker";
 
@@ -140,6 +141,32 @@ const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
 
   let navbar = useRef(null);
+  let title = useRef(null);
+  let about = useRef(null);
+  let faq = useRef(null);
+  let bookSlot = useRef(null);
+  let languagePicker = useRef(null);
+
+  const navItemsEnter = () => {
+    let tl = new TimelineLite({ delay: 2 });
+
+    tl.staggerFrom(
+      [title, about, faq, bookSlot, languagePicker],
+      0.7,
+      {
+        y: -30,
+        autoAlpha: 0,
+        ease: Power3.easeOut,
+      },
+      0.2
+    );
+
+    return tl;
+  };
+
+  useEffect(() => {
+    navItemsEnter();
+  }, []);
 
   // Make navbar hide and appear based on scrolling
   useEffect(() => {
@@ -178,7 +205,7 @@ const Navbar = () => {
   return (
     <NavbarComp ref={(el) => (navbar = el)}>
       <Container>
-        <Title>
+        <Title ref={(el) => (title = el)}>
           <Link
             to="home"
             smooth={true}
@@ -211,7 +238,7 @@ const Navbar = () => {
               }, 100);
             }}
           >
-            <NavItem>about</NavItem>
+            <NavItem ref={(el) => (about = el)}>about</NavItem>
           </Link>
           <Link
             to="faq"
@@ -223,7 +250,7 @@ const Navbar = () => {
               }, 100);
             }}
           >
-            <NavItem>faq</NavItem>
+            <NavItem ref={(el) => (faq = el)}>faq</NavItem>
           </Link>
           <Link
             to="bookslot"
@@ -235,9 +262,12 @@ const Navbar = () => {
               }, 100);
             }}
           >
-            <NavItem>book slot</NavItem>
+            <NavItem ref={(el) => (bookSlot = el)}>book slot</NavItem>
           </Link>
-          <LanguagePicker setNavOpen={setNavOpen} />
+          <LanguagePicker
+            setNavOpen={setNavOpen}
+            ref={(el) => (languagePicker = el)}
+          />
         </NavItems>
       </Container>
     </NavbarComp>

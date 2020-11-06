@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, forwardRef } from "react";
 import styled from "styled-components";
 
 import { LanguageContext } from "../contexts/LanguageContext";
@@ -90,11 +90,11 @@ const Underline = styled.div`
   background-color: #d3c092;
 `;
 
-const LanguagePicker = (props) => {
+const LanguagePicker = forwardRef((props, ref) => {
   const [language, setLanguage] = useContext(LanguageContext);
 
   return (
-    <LanguagePickerComp>
+    <LanguagePickerComp ref={ref}>
       <LanguageOption
         onClick={() => {
           setLanguage("english");
@@ -128,6 +128,6 @@ const LanguagePicker = (props) => {
       </LanguageOption>
     </LanguagePickerComp>
   );
-};
+});
 
 export default LanguagePicker;
