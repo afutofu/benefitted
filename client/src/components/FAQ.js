@@ -170,7 +170,7 @@ const FAQ = () => {
 
     tl.from(qaRef, {
       autoAlpha: 0,
-      duration: 0.3,
+      duration: 1,
       ease: Power3.easeOut,
     });
 
