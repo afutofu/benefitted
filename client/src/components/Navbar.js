@@ -172,7 +172,7 @@ const Navbar = () => {
       y: -30,
       autoAlpha: 0,
       ease: Power3.easeOut,
-      durtation: 0.5,
+      duration: 0.5,
     });
 
     return tl;
