@@ -82,6 +82,7 @@ const Image = styled.img.attrs((props) => ({
   background-color: #e2d6c0;
   margin-right: 50px;
   transform-origin: center center;
+  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.15);
   /* margin-bottom: 50px; */
 
   @media only screen and (max-width: 600px) {
@@ -165,11 +166,15 @@ const BottomArea = styled.div`
 `;
 
 const Home = () => {
+  // Initialize references
   let galleryCover = useRef(null);
   let arrow = useRef(null);
+
+  // Initialize states
   const [posts, setPosts] = useState([]);
   const [postsLoading, setPostsLoading] = useState(true);
 
+  // Animation to open gallery cover
   const openGallery = () => {
     let tl = new TimelineLite();
 
@@ -182,6 +187,7 @@ const Home = () => {
     return tl;
   };
 
+  // Animation for prompt arrow
   const arrowEnter = () => {
     let tl = new TimelineLite({ delay: 0.5 });
 
@@ -193,15 +199,15 @@ const Home = () => {
     return tl;
   };
 
+  // Retreive posts from API
   useEffect(() => {
     axios
       .get("/api/posts")
       .then((res) => {
+        // Gets rid of loading spinner and set posts 1 second after successfully retreiving data
         setTimeout(() => {
           setPostsLoading(false);
-          setTimeout(() => {
-            setPosts([...res.data]);
-          }, 250);
+          setPosts([...res.data]);
         }, 1000);
       })
       .catch((err) => {
@@ -211,8 +217,11 @@ const Home = () => {
 
   useEffect(() => {
     if (posts.length > 0) {
-      arrowEnter();
-      openGallery();
+      // Open gallery cover and arrow animation 1s after setting posts. Allows images to fully load before gallery opens
+      setTimeout(() => {
+        arrowEnter();
+        openGallery();
+      }, 1000);
     }
   }, [posts.length]);
 
