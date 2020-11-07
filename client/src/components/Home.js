@@ -92,6 +92,8 @@ const Image = styled.img.attrs((props) => ({
   transform-origin: center center;
   box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.15);
 
+  transition: box-shadow 0.15s;
+
   :hover {
     box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
   }
