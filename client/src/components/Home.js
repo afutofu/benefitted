@@ -178,7 +178,7 @@ const Home = () => {
   const openGallery = () => {
     let tl = new TimelineLite();
 
-    tl.to(galleryCover, {
+    tl.to(galleryCover.current, {
       y: "-100%",
       duration: 1,
       ease: Power3.easeOut,
@@ -191,7 +191,7 @@ const Home = () => {
   const arrowEnter = () => {
     let tl = new TimelineLite({ delay: 0.5 });
 
-    tl.to(arrow, {
+    tl.to(arrow.current, {
       autoAlpha: 1,
       duration: 1,
     });
@@ -204,11 +204,8 @@ const Home = () => {
     axios
       .get("/api/posts")
       .then((res) => {
-        // Gets rid of loading spinner and set posts 1 second after successfully retreiving data
-        setTimeout(() => {
-          setPostsLoading(false);
-          setPosts([...res.data]);
-        }, 1000);
+        // Set posts immediately after retreiving data
+        setPosts([...res.data]);
       })
       .catch((err) => {
         console.log(err.response.data.msg);
@@ -219,16 +216,19 @@ const Home = () => {
     if (posts.length > 0) {
       // Open gallery cover and arrow animation 1s after setting posts. Allows images to fully load before gallery opens
       setTimeout(() => {
-        arrowEnter();
-        openGallery();
-      }, 1000);
+        setTimeout(() => {
+          arrowEnter();
+          openGallery();
+        }, 200);
+        setPostsLoading(false);
+      }, 2500);
     }
   }, [posts.length]);
 
   return (
     <HomeComp id="home">
       <Gallery>
-        <GalleryCover ref={(el) => (galleryCover = el)}>
+        <GalleryCover ref={galleryCover}>
           {postsLoading && <RippleSpinner />}
         </GalleryCover>
         <ContainerWrapper>
@@ -249,7 +249,7 @@ const Home = () => {
         </ContainerWrapper>
       </Gallery>
       <BottomArea>
-        <i className="fas fa-chevron-down" ref={(el) => (arrow = el)}></i>
+        <i className="fas fa-chevron-down" ref={arrow}></i>
       </BottomArea>
     </HomeComp>
   );
