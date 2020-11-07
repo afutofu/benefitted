@@ -7,6 +7,7 @@ require("dotenv/config");
 // @desc    Get 10 posts
 // @access  Public
 router.get("/", (req, res) => {
+  // Use Instagram Basic Display API to access the posts
   axios
     .get(
       `https://graph.instagram.com/me/media?fields=id, media_type, media_url&access_token=${process.env.IG_ACCESS_TOKEN}`

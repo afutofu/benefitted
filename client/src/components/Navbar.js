@@ -138,8 +138,10 @@ const NavItem = styled.li`
 `;
 
 const Navbar = () => {
+  // Initialize state
   const [navOpen, setNavOpen] = useState(false);
 
+  // Initialize references
   let navbar = useRef(null);
   let title = useRef(null);
   let burger = useRef(null);
@@ -148,6 +150,7 @@ const Navbar = () => {
   let bookSlot = useRef(null);
   let languagePicker = useRef(null);
 
+  // Animation for nav items entering. Fade in from top.
   const navItemsEnter = () => {
     let tl = new TimelineLite();
 
@@ -165,6 +168,7 @@ const Navbar = () => {
     return tl;
   };
 
+  // Animation for hamburger icon. Fade in from top.
   const burgerEnter = () => {
     let tl = new TimelineLite({ delay: 0.2 });
 
@@ -178,6 +182,7 @@ const Navbar = () => {
     return tl;
   };
 
+  // Initialize animations after components are mounted
   useEffect(() => {
     navItemsEnter();
     burgerEnter();
@@ -185,8 +190,12 @@ const Navbar = () => {
 
   // Make navbar hide and appear based on scrolling
   useEffect(() => {
+    // Set navbar top to 0px
     navbar.style.top = "0px";
+
+    // Get navbar class
     const navbarClass = "." + navbar.getAttribute("class").split(" ").join(".");
+
     let lastScrollPosition = 0;
     window.addEventListener("scroll", () => {
       // Get navbar element
@@ -207,15 +216,24 @@ const Navbar = () => {
 
         // Scrolling down
       } else if (topOfScreenPosition > lastScrollPosition) {
+        // Set navbar over the screen
         navbarDOM.style.top = `-${navbarDOM.clientHeight}px`;
       } else {
         // Scrolling up
+        // Set navbar on screen. Add box shadow
         navbarDOM.style.top = "0";
         navbarDOM.style.boxShadow = "0px 1px 15px 0px rgba(0, 0, 0, 0.1)";
       }
       lastScrollPosition = topOfScreenPosition;
     });
   }, [navbar]);
+
+  // Close navbar after 100 ms
+  const closeNavbar = () => {
+    setTimeout(() => {
+      setNavOpen(false);
+    }, 100);
+  };
 
   return (
     <NavbarComp ref={(el) => (navbar = el)}>
@@ -226,9 +244,7 @@ const Navbar = () => {
             smooth={true}
             duration={1000}
             onClick={() => {
-              setTimeout(() => {
-                setNavOpen(false);
-              }, 100);
+              closeNavbar();
             }}
           >
             bnftd.
@@ -252,9 +268,7 @@ const Navbar = () => {
             smooth={true}
             duration={1000}
             onClick={() => {
-              setTimeout(() => {
-                setNavOpen(false);
-              }, 100);
+              closeNavbar();
             }}
           >
             <NavItem ref={(el) => (about = el)}>about</NavItem>
@@ -264,9 +278,7 @@ const Navbar = () => {
             smooth={true}
             duration={1000}
             onClick={() => {
-              setTimeout(() => {
-                setNavOpen(false);
-              }, 100);
+              closeNavbar();
             }}
           >
             <NavItem ref={(el) => (faq = el)}>faq</NavItem>
@@ -276,9 +288,7 @@ const Navbar = () => {
             smooth={true}
             duration={1000}
             onClick={() => {
-              setTimeout(() => {
-                setNavOpen(false);
-              }, 100);
+              closeNavbar();
             }}
           >
             <NavItem ref={(el) => (bookSlot = el)}>book slot</NavItem>

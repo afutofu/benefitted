@@ -184,28 +184,42 @@ const CancelButton = styled.button`
 
 let firstRender = true;
 const AdminModal = () => {
+  // Iniitalize states
   const [errorMsg, setErrorMsg] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(null);
+
+  // Retreive states from AdminContext
   const { admin, modal } = useContext(AdminContext);
   const { modalOpen, setModalOpen } = modal;
   const { setIsAdmin } = admin;
 
+  // firstRender prevents modal from appearing and disappearing when app is first opened. Modal only opens when it is prompted to open
   if (modalOpen) firstRender = false;
 
+  // Login through auth route
   const login = (password) => {
+    // Reset error message
     setErrorMsg(null);
+
+    // Post request to auth route, takes in a password. If password is verified, api will send back new jwt, if not it will send back an error and error message
     axios
       .post("/api/auth", { password })
       .then((res) => {
+        // If data is retreived, store received token to localstorage
         localStorage.setItem("token", res.data.token);
+
+        // Set admin and success to true
         setIsAdmin(true);
         setSuccess(true);
+
+        // Close modal after 1 second, allows admin to see the success message
         setTimeout(() => {
           setModalOpen(false);
         }, 1000);
       })
       .catch((err) => {
+        // Reset password and display error message in 0.5 seconds
         setPassword("");
         setTimeout(() => {
           setErrorMsg(err.response.data.msg);
@@ -213,11 +227,13 @@ const AdminModal = () => {
       });
   };
 
+  // Close modal and set password input to empty string
   const closeModal = () => {
     setPassword("");
     setModalOpen(false);
   };
 
+  // Doesnt render the first time it is initialized. Prevents appearing and dissapearing bug
   if (!firstRender) {
     return (
       <AdminModalComp modalOpen={modalOpen} firstRender={firstRender}>

@@ -91,7 +91,15 @@ const Underline = styled.div`
 `;
 
 const LanguagePicker = forwardRef((props, ref) => {
+  // Retreive state from LanguageContext
   const [language, setLanguage] = useContext(LanguageContext);
+
+  // Close navbar after 200 ms
+  const closeNavbar = () => {
+    setTimeout(() => {
+      props.setNavOpen(false);
+    }, 200);
+  };
 
   return (
     <LanguagePickerComp ref={ref}>
@@ -99,9 +107,7 @@ const LanguagePicker = forwardRef((props, ref) => {
         onClick={() => {
           setLanguage("english");
           if (language === "indonesian") {
-            setTimeout(() => {
-              props.setNavOpen(false);
-            }, 200);
+            closeNavbar();
           }
         }}
       >
@@ -115,9 +121,7 @@ const LanguagePicker = forwardRef((props, ref) => {
         onClick={() => {
           setLanguage("indonesian");
           if (language === "english") {
-            setTimeout(() => {
-              props.setNavOpen(false);
-            }, 200);
+            closeNavbar();
           }
         }}
       >

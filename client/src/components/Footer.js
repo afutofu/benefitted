@@ -53,6 +53,7 @@ const Container = styled.div`
 `;
 
 const Footer = () => {
+  // Retreive admin states from AdminContext
   const { admin, modal } = useContext(AdminContext);
   const { isAdmin } = admin;
   const { setModalOpen } = modal;

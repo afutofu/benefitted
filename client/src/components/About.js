@@ -348,12 +348,14 @@ const Motto = styled.h2`
 const About = () => {
   const [language] = useContext(LanguageContext);
 
+  // Create refs for each component
   let logo = useRef(null);
   let visionImage = useRef(null);
   let visionText = useRef(null);
   let missionImage = useRef(null);
   let missionText = useRef(null);
 
+  // Animation when logo is in view. Fade in from bottom
   const logoEnter = () => {
     let tl = new TimelineLite({
       scrollTrigger: {
@@ -373,6 +375,7 @@ const About = () => {
     return tl;
   };
 
+  // Animation when vision is in view. Fades in and image and text enters from opposite directions
   const visionEnter = () => {
     let tl = new TimelineLite({
       scrollTrigger: {
@@ -403,6 +406,7 @@ const About = () => {
     return tl;
   };
 
+  // Animation when mission is in view. Fades in and image and text enters from opposite directions
   const missionEnter = () => {
     let tl = new TimelineLite({
       scrollTrigger: {
@@ -431,6 +435,7 @@ const About = () => {
     return tl;
   };
 
+  // Initialize all animations once components are mounted
   useEffect(() => {
     logoEnter();
     visionEnter();

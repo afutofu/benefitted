@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useMemo } from "react";
+import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
 import parse from "react-html-parser";
 import { gsap, TimelineLite, Power3 } from "gsap";
@@ -155,10 +155,12 @@ const qas = [
   },
 ];
 
+let qaRefs = [];
 const FAQ = () => {
-  let qaRefs = useMemo(() => [], []);
+  // Retreive language from LanguageContext
   const [language] = useContext(LanguageContext);
 
+  // Give each QA ref an animation. Fades in.
   const qaEnter = (qaRef) => {
     let tl = new TimelineLite({
       scrollTrigger: {
@@ -177,17 +179,19 @@ const FAQ = () => {
     return tl;
   };
 
+  // Initialize each QA ref with an animation once components are mounted
   useEffect(() => {
     qaRefs.forEach((qaRef) => {
       qaEnter(qaRef);
     });
-  }, [qaRefs]);
+  }, []);
 
   return (
     <FAQComp id="faq">
       <Container>
         {qas.map((qa, i) => {
           return (
+            // Add each ref into qaRefs array
             <QA key={i} ref={(el) => (qaRefs[i] = el)}>
               <Question>
                 {language === "english" ? qa.question : qa.questionIndo}

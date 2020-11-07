@@ -170,14 +170,16 @@ const InfoText = styled.p`
 `;
 
 const BookSlot = () => {
+  // Initialize states
   const [bookedSlots, setBookedSlots] = useState([]);
+
+  // Retreive states from Language and Admin contexts
   const [language] = useContext(LanguageContext);
   const { admin } = useContext(AdminContext);
-
   const { isAdmin, setIsAdmin } = admin;
 
+  // Get current month index and year (ex - January is 1)
   const date = new Date();
-
   const monthIndex = date.getMonth() + 1;
   const year = date.getFullYear();
 
@@ -188,6 +190,8 @@ const BookSlot = () => {
         "x-auth-token": [localStorage.getItem("token")],
       },
     };
+
+    // Get request to auth route to check if token is valid for client to be set as admin
     axios
       .get("/api/auth/admin", config)
       .then(() => {
@@ -197,6 +201,7 @@ const BookSlot = () => {
         console.log(err.response.data.msg);
       });
 
+    // Get all booked slot dates
     axios
       .get(`/api/slotDates/${year}/${monthIndex}`)
       .then((res) => {
@@ -207,6 +212,7 @@ const BookSlot = () => {
       });
   }, [year, monthIndex, setIsAdmin]);
 
+  // Converts month index to return corresponding month name
   const getMonthName = (monthIndex) => {
     if (language === "english") {
       switch (monthIndex) {
@@ -239,6 +245,7 @@ const BookSlot = () => {
       }
     }
 
+    // Convert month index to corresponding month name in Indonesian
     switch (monthIndex) {
       case 1:
         return "Januari";
@@ -269,6 +276,7 @@ const BookSlot = () => {
     }
   };
 
+  // Returns the number of days in a month (ex- month=1, year=2020)
   const daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
@@ -284,9 +292,6 @@ const BookSlot = () => {
 
     return booked;
   };
-
-  const monthName = getMonthName(monthIndex);
-  const numDays = daysInMonth(monthIndex, year);
 
   // Book a slot date
   const bookSlot = (day) => {
@@ -332,12 +337,17 @@ const BookSlot = () => {
     }
   };
 
+  // Get month name and number of days in a month and year
+  const monthName = getMonthName(monthIndex);
+  const numDays = daysInMonth(monthIndex, year);
+
   let slots = [];
   for (let day = 1; day <= numDays; day++) {
     slots.push(
       <Slot
         key={day}
         isAdmin={isAdmin}
+        // If the day is booked, onClick deletes it. If not, onClick books it
         onClick={() => {
           if (isBooked(day)) {
             deleteBookedSlot(day);

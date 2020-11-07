@@ -1,6 +1,7 @@
 require("dotenv/config");
 const jwt = require("jsonwebtoken");
 
+// Authentication using jwt. If token exists and has not expired, continue to next
 const auth = (req, res, next) => {
   const token = req.header("x-auth-token");
 
@@ -10,11 +11,12 @@ const auth = (req, res, next) => {
 
   try {
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_KEY);
+    const decodedInfo = jwt.verify(token, process.env.JWT_KEY);
 
-    // Add user from payload
-    req.user = decoded;
-    next();
+    // If no error is thrown and decoded info is valid, then token is verified
+    if (decodedInfo) {
+      next();
+    }
   } catch (e) {
     res.status(400).json({ msg: "Token is invalid" });
   }
