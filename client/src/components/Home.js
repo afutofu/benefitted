@@ -74,16 +74,27 @@ const Container = styled.div`
   }
 `;
 
+const ImageWrapper = styled.a.attrs((props) => ({
+  href: props.href,
+  target: "_blank",
+  rel: "noreferrer",
+}))`
+  margin-right: 50px;
+`;
+
 const Image = styled.img.attrs((props) => ({
   src: props.src,
 }))`
   width: 50vh;
   height: 50vh;
   background-color: #e2d6c0;
-  margin-right: 50px;
+
   transform-origin: center center;
   box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.15);
-  /* margin-bottom: 50px; */
+
+  :hover {
+    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
+  }
 
   @media only screen and (max-width: 600px) {
     width: 45vh;
@@ -234,7 +245,11 @@ const Home = () => {
         <ContainerWrapper>
           <Container>
             {posts.map((post) => {
-              return <Image key={post.id} src={post.media_url} />;
+              return (
+                <ImageWrapper href={post.permalink}>
+                  <Image key={post.id} src={post.media_url} />
+                </ImageWrapper>
+              );
             })}
             <Prompt>
               <a
