@@ -166,7 +166,7 @@ const FAQ = () => {
       scrollTrigger: {
         trigger: qaRef,
         toggleActions: "play none none none",
-        start: "top center",
+        start: "top center+=200",
       },
     });
 
