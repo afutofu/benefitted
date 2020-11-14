@@ -360,7 +360,7 @@ const About = () => {
     let tl = new TimelineLite({
       scrollTrigger: {
         trigger: logo,
-        start: "top center",
+        start: "top-=150 center",
         toggleActions: "play none none none",
       },
     });
