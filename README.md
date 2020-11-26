@@ -1,6 +1,7 @@
 # Benefitted
 
 Website Link: [Benefitted](https://benefitted.herokuapp.com)
+Instagram Page: [instagram.com/benefitted.id/](https://www.instagram.com/benefitted.id/)
 
 Landing page for Benefitted.
 
