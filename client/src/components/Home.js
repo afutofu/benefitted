@@ -92,10 +92,10 @@ const Image = styled.img.attrs((props) => ({
   transform-origin: center center;
   box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.15);
 
-  transition: box-shadow 0.15s;
+  transition: box-shadow 0.2s;
 
   :hover {
-    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.5);
   }
 
   @media only screen and (max-width: 600px) {
