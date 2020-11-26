@@ -208,7 +208,10 @@ const BookSlot = () => {
         setBookedSlots([...res.data]);
       })
       .catch((err) => {
-        console.log(err.response.data.msg);
+        if (err.response) {
+          console.log(err.response.data.msg);
+        }
+        console.log(err);
       });
   }, [year, monthIndex, setIsAdmin]);
 
