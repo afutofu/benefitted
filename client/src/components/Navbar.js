@@ -37,7 +37,7 @@ const Backdrop = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: -100;
+  z-index: 100;
   transition: transform 0.4s ease-out;
   transform: ${(props) =>
     props.navOpen ? "translateX(0)" : "translateX(100%)"};
@@ -85,13 +85,14 @@ const Hamburger = styled.div`
   @media only screen and (max-width: 600px) {
     display: block;
   }
+  z-index: 150;
 `;
 
 const NavItems = styled.ul`
   list-style: none;
   display: flex;
   align-items: center;
-  z-index: 50;
+  z-index: 150;
 
   @media only screen and (max-width: 600px) {
     position: absolute;
