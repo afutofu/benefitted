@@ -32,6 +32,7 @@ const Container = styled.div`
 
   @media only screen and (max-width: 600px) {
     justify-content: space-between;
+    font-size: 10px;
   }
 
   @media only screen and (max-width: 450px) {
@@ -61,7 +62,7 @@ const Footer = () => {
   return (
     <FooterComp>
       <Container>
-        &#169; 2020 Benefitted. All rights reserved
+        &#169; 2020 Benefitted. All rights reserved.
         {!isAdmin && (
           <i
             className="fas fa-sign-in-alt"
