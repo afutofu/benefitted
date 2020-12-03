@@ -169,6 +169,7 @@ const InfoText = styled.p`
   }
 `;
 
+let bookSlotLoading = false;
 const BookSlot = () => {
   // Initialize states
   const [bookedSlots, setBookedSlots] = useState([]);
@@ -298,6 +299,8 @@ const BookSlot = () => {
 
   // Book a slot date
   const bookSlot = (day) => {
+    bookSlotLoading = true;
+
     if (isAdmin) {
       const config = {
         headers: {
@@ -314,11 +317,17 @@ const BookSlot = () => {
           localStorage.removeItem("token");
           setIsAdmin(false);
           console.log(err.response.data.msg);
+        })
+        .finally(() => {
+          bookSlotLoading = false;
         });
     }
   };
 
+  // Delete a booked slot
   const deleteBookedSlot = (day) => {
+    bookSlotLoading = true;
+
     if (isAdmin) {
       const config = {
         headers: {
@@ -336,6 +345,9 @@ const BookSlot = () => {
           localStorage.removeItem("token");
           setIsAdmin(false);
           console.log(err.response.data.msg);
+        })
+        .finally(() => {
+          bookSlotLoading = false;
         });
     }
   };
@@ -352,10 +364,12 @@ const BookSlot = () => {
         isAdmin={isAdmin}
         // If the day is booked, onClick deletes it. If not, onClick books it
         onClick={() => {
-          if (isBooked(day)) {
-            deleteBookedSlot(day);
-          } else {
-            bookSlot(day);
+          if (bookSlotLoading === false) {
+            if (isBooked(day)) {
+              deleteBookedSlot(day);
+            } else {
+              bookSlot(day);
+            }
           }
         }}
         booked={isBooked(day)}
