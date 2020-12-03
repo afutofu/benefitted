@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { TimelineLite, Power3 } from "gsap";
 import axios from "axios";
+
+import { LanguageContext } from "../contexts/LanguageContext";
 
 import RippleSpinner from "./RippleSpinner";
 
@@ -179,6 +181,9 @@ const BottomArea = styled.div`
 `;
 
 const Home = () => {
+  // Retreive language from LanguageContext
+  const [language] = useContext(LanguageContext);
+
   // Initialize references
   let galleryCover = useRef(null);
   let arrow = useRef(null);
@@ -246,9 +251,9 @@ const Home = () => {
         </GalleryCover>
         <ContainerWrapper>
           <Container>
-            {posts.map((post) => {
+            {posts.map((post, i) => {
               return (
-                <ImageWrapper href={post.permalink}>
+                <ImageWrapper key={i} href={post.permalink}>
                   <Image key={post.id} src={post.media_url} />
                 </ImageWrapper>
               );
@@ -259,7 +264,9 @@ const Home = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                Check our instagram for more!
+                {language === "english"
+                  ? "Check our instagram for more!"
+                  : "Lihat instagram kami untuk melihat yang lain!"}
               </a>
             </Prompt>
           </Container>
