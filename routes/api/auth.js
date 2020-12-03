@@ -29,8 +29,8 @@ router.post("/", (req, res) => {
   });
 });
 
-// @route   GET /api/auth/user
-// @desc    Authenticate user
+// @route   GET /api/auth/admin
+// @desc    Authenticate admin
 // @access  Private
 router.get("/admin", auth, (req, res) => {
   // Sign a new jwt if token is still available when client loads content
