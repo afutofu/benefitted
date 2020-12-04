@@ -169,6 +169,8 @@ const InfoText = styled.p`
   }
 `;
 
+// Initialize loading variable.
+// Avoids users from making requests when another is being sent
 let bookSlotLoading = false;
 const BookSlot = () => {
   // Initialize states
@@ -299,6 +301,8 @@ const BookSlot = () => {
 
   // Book a slot date
   const bookSlot = (day) => {
+    if (bookSlotLoading === true) return;
+
     bookSlotLoading = true;
 
     if (isAdmin) {
@@ -326,6 +330,8 @@ const BookSlot = () => {
 
   // Delete a booked slot
   const deleteBookedSlot = (day) => {
+    if (bookSlotLoading === true) return;
+
     bookSlotLoading = true;
 
     if (isAdmin) {
@@ -364,12 +370,10 @@ const BookSlot = () => {
         isAdmin={isAdmin}
         // If the day is booked, onClick deletes it. If not, onClick books it
         onClick={() => {
-          if (bookSlotLoading === false) {
-            if (isBooked(day)) {
-              deleteBookedSlot(day);
-            } else {
-              bookSlot(day);
-            }
+          if (isBooked(day)) {
+            deleteBookedSlot(day);
+          } else {
+            bookSlot(day);
           }
         }}
         booked={isBooked(day)}
