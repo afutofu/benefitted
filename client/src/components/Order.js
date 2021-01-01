@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+import order1 from "../assets/order1.png";
+import order2 from "../assets/order2.png";
+import order3 from "../assets/order3.png";
+import order4 from "../assets/order4.png";
+import order5 from "../assets/order5.png";
+
 const OrderComp = styled.section`
   position: relative;
   width: 100%;
@@ -22,7 +28,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #eee;
+  background-color: #fff;
   box-sizing: border-box;
 
   @media only screen and (max-width: 600px) {
@@ -34,7 +40,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   position: absolute;
-  top: 12vh;
+  top: 75px;
   text-transform: uppercase;
   font-size: 60px;
   text-align: center;
@@ -42,17 +48,18 @@ const Title = styled.h1`
   font-style: italic;
   z-index: 10;
 
-  @media only screen and (max-width: 992px) {
-    font-size: 60px;
+  @media only screen and (max-width: 786px) {
+    top: 90px;
+    font-size: 50px;
   }
 
   @media only screen and (max-width: 600px) {
-    top: 15vh;
-    font-size: 40px;
+    top: 85px;
+    font-size: 45px;
   }
 
   @media only screen and (max-width: 450px) {
-    top: 16vh;
+    top: 130px;
     font-size: 35px;
   }
 `;
@@ -98,6 +105,16 @@ const Instruction = styled.li`
   }
 `;
 
+const Image = styled.img`
+  width: 70%;
+  margin-left: ${({ marginLeft }) => (marginLeft ? "auto" : "")};
+  margin-bottom: 30px;
+
+  @media only screen and (max-width: 992px) {
+    margin-bottom: 20px;
+  }
+`;
+
 const Order = () => {
   return (
     <OrderComp id="order">
@@ -116,14 +133,18 @@ const Order = () => {
             have a design, you can ask for a theme. We will help make the design
             with you.
           </Instruction>
+          <Image src={order1} alt="dm" />
           <Instruction>
             Once you are satisfied with our design, we can start discussing
             price.
           </Instruction>
+          <Image src={order2} alt="dm" />
+          <Image src={order3} alt="dm" marginLeft={true} />
           <Instruction>
             You will receive an order form and start booking a slot. To book a
             slot, you will need to pay at least 50% of the price of your order.
           </Instruction>
+          <Image src={order4} alt="dm" marginLeft={true} />
           <Instruction>
             Once transferred, send your shoe to our address a minimum of 3 days
             prior to slot date.
@@ -138,6 +159,7 @@ const Order = () => {
             off. We will send your tracking number (Nomor Resi). Will be sent
             H+1 after delivery.
           </Instruction>
+          <Image src={order5} alt="dm" marginLeft={true} />
         </Instructions>
       </Container>
     </OrderComp>
