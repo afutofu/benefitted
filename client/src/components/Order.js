@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const OrderComp = styled.section`
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20vh 0;
+  padding: 15vh 0;
+  font-family: "Montserrat", "sans-serif";
 `;
 
 const Container = styled.div`
@@ -15,6 +17,7 @@ const Container = styled.div`
   width: 50%;
   height: 100%;
   padding: 40px 40px;
+  padding-top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,16 +27,33 @@ const Container = styled.div`
 
   @media only screen and (max-width: 600px) {
     width: 70%;
+    padding: 40px 20px;
+    padding-top: 80px;
   }
 `;
 
 const Title = styled.h1`
-  text-transform: capitalize;
-  font-size: 26px;
+  position: absolute;
+  top: 12vh;
+  text-transform: uppercase;
+  font-size: 60px;
   text-align: center;
+  font-weight: 900;
+  font-style: italic;
+  z-index: 10;
+
+  @media only screen and (max-width: 992px) {
+    font-size: 60px;
+  }
 
   @media only screen and (max-width: 600px) {
-    font-size: 20px;
+    top: 15vh;
+    font-size: 40px;
+  }
+
+  @media only screen and (max-width: 450px) {
+    top: 16vh;
+    font-size: 35px;
   }
 `;
 
@@ -47,8 +67,8 @@ const Instructions = styled.ol`
 
 const Instruction = styled.li`
   margin: 0;
-  margin-bottom: 15px;
-  line-height: 1.4em;
+  margin-bottom: 30px;
+  line-height: 1.5em;
   padding-left: 5px;
   font-size: 16px;
 
@@ -58,18 +78,7 @@ const Instruction = styled.li`
 
   @media only screen and (max-width: 992px) {
     font-size: 12px;
-  }
-
-  @media only screen and (max-width: 768px) {
-    font-size: 16px;
-  }
-
-  @media only screen and (max-width: 600px) {
-    font-size: 14px;
-  }
-
-  @media only screen and (max-width: 350px) {
-    font-size: 12px;
+    margin-bottom: 20px;
   }
 
   a {
@@ -92,12 +101,12 @@ const Instruction = styled.li`
 const Order = () => {
   return (
     <OrderComp id="order">
+      <Title>How To Order</Title>
       <Container>
-        <Title>How To Order</Title>
         <Instructions>
           <Instruction>
             Go our instagram{" "}
-            <a href="https://www.instagram.com/benefitted.id/">
+            <a href="https://www.instagram.com/benefitted.id/" target="blank">
               @benefitted.id
             </a>
             .
