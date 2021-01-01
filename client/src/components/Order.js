@@ -29,6 +29,12 @@ const Container = styled.div`
 
 const Title = styled.h1`
   text-transform: capitalize;
+  font-size: 26px;
+  text-align: center;
+
+  @media only screen and (max-width: 600px) {
+    font-size: 20px;
+  }
 `;
 
 const Instructions = styled.ol`
@@ -44,6 +50,39 @@ const Instruction = styled.li`
   margin-bottom: 15px;
   line-height: 1.4em;
   padding-left: 5px;
+  font-size: 16px;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 14px;
+  }
+
+  @media only screen and (max-width: 992px) {
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 16px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 14px;
+  }
+
+  @media only screen and (max-width: 350px) {
+    font-size: 12px;
+  }
+
+  a {
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    border-bottom: #d3c092 4px solid;
+
+    :hover {
+      border-bottom: #e2d6c0 4px solid;
+    }
+  }
 
   :last-child {
     margin: 0;
@@ -56,17 +95,17 @@ const Order = () => {
       <Container>
         <Title>How To Order</Title>
         <Instructions>
-          <Instruction>Go to instagram.</Instruction>
           <Instruction>
-            <Instructions type="a">
-              <Instruction>
-                DM us informing your shoe type and what design you would like.
-              </Instruction>
-              <Instruction>
-                If you don't have a design, you can ask for a theme. We will
-                help make the design with you.
-              </Instruction>
-            </Instructions>
+            Go our instagram{" "}
+            <a href="https://www.instagram.com/benefitted.id/">
+              @benefitted.id
+            </a>
+            .
+          </Instruction>
+          <Instruction>
+            DM us your shoe type and what design you would like. If you don't
+            have a design, you can ask for a theme. We will help make the design
+            with you.
           </Instruction>
           <Instruction>
             Once you are satisfied with our design, we can start discussing
@@ -87,8 +126,8 @@ const Order = () => {
           </Instruction>
           <Instruction>
             Once your payment is received, we will pack your shoe and send it
-            off. We will send your tracking number (Nomor Resi). Will be sent H
-            + 1 after delivery.
+            off. We will send your tracking number (Nomor Resi). Will be sent
+            H+1 after delivery.
           </Instruction>
         </Instructions>
       </Container>
