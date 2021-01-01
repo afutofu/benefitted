@@ -23,13 +23,19 @@ const Container = styled.div`
   width: 50%;
   height: 100%;
   padding: 40px 40px;
-  padding-top: 100px;
+  padding-top: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #fff;
   box-sizing: border-box;
+
+  @media only screen and (max-width: 1200px) {
+    width: 50%;
+    padding: 40px 20px;
+    padding-top: 100px;
+  }
 
   @media only screen and (max-width: 600px) {
     width: 70%;
@@ -40,13 +46,18 @@ const Container = styled.div`
 
 const Title = styled.h1`
   position: absolute;
-  top: 75px;
+  top: 100px;
   text-transform: uppercase;
   font-size: 60px;
   text-align: center;
   font-weight: 900;
   font-style: italic;
   z-index: 10;
+
+  @media only screen and (max-width: 1200px) {
+    top: 75px;
+    font-size: 60px;
+  }
 
   @media only screen and (max-width: 786px) {
     top: 90px;
