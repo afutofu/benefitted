@@ -4,6 +4,7 @@ import { Link } from "react-scroll";
 import { TimelineLite, Power3 } from "gsap";
 
 import LanguagePicker from "./LanguagePicker";
+import logoText from "../assets/text_logo.png";
 
 const NavbarComp = styled.nav`
   position: fixed;
@@ -55,23 +56,17 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
+  position: relative;
   text-transform: uppercase;
-  font-size: 50px;
   margin: 0;
-  font-weight: 700;
   padding: 5px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  @media only screen and (max-width: 1200px) {
-    font-size: 45px;
-  }
-
-  @media only screen and (max-width: 992px) {
-    font-size: 40px;
-  }
-
-  @media only screen and (max-width: 768px) {
-    font-size: 35px;
+  img {
+    height: 150px;
   }
 `;
 
@@ -240,18 +235,19 @@ const Navbar = () => {
   return (
     <NavbarComp ref={(el) => (navbar = el)}>
       <Container>
-        <Title ref={(el) => (title = el)}>
-          <Link
-            to="home"
-            smooth={true}
-            duration={1000}
-            onClick={() => {
-              closeNavbar();
-            }}
-          >
-            bnftd.
-          </Link>
-        </Title>
+        <Link
+          to="about"
+          smooth={true}
+          duration={1000}
+          onClick={() => {
+            closeNavbar();
+          }}
+        >
+          <Title ref={(el) => (title = el)}>
+            <img src={logoText} />
+          </Title>
+        </Link>
+
         <Hamburger
           onClick={() => setNavOpen(!navOpen)}
           navOpen={navOpen}
