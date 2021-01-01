@@ -14,15 +14,14 @@ const OrderComp = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15vh 0;
+  margin: 15vh 0;
   font-family: "Montserrat", "sans-serif";
 `;
 
 const Container = styled.div`
   position: relative;
   width: 50%;
-  height: 100%;
-  padding: 40px 40px;
+  padding: 0 40px;
   padding-top: 150px;
   display: flex;
   flex-direction: column;
@@ -33,45 +32,61 @@ const Container = styled.div`
 
   @media only screen and (max-width: 1200px) {
     width: 50%;
-    padding: 40px 20px;
+    padding: 0 20px;
     padding-top: 100px;
   }
 
   @media only screen and (max-width: 600px) {
     width: 70%;
-    padding: 40px 20px;
+    padding: 0 20px;
     padding-top: 80px;
   }
 `;
 
 const Title = styled.h1`
   position: absolute;
-  top: 100px;
+  top: 50px;
   text-transform: uppercase;
   font-size: 60px;
   text-align: center;
   font-weight: 900;
   font-style: italic;
   z-index: 10;
+  margin: 0;
 
   @media only screen and (max-width: 1200px) {
-    top: 75px;
+    top: 20px;
     font-size: 60px;
   }
 
   @media only screen and (max-width: 786px) {
-    top: 90px;
+    top: 30px;
     font-size: 50px;
   }
 
   @media only screen and (max-width: 600px) {
-    top: 85px;
+    top: 30px;
     font-size: 45px;
   }
 
-  @media only screen and (max-width: 450px) {
-    top: 130px;
+  @media only screen and (max-width: 500px) {
+    top: 30px;
+    font-size: 40px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    top: 30px;
     font-size: 35px;
+  }
+
+  @media only screen and (max-width: 350px) {
+    top: 35px;
+    font-size: 30px;
+  }
+
+  @media only screen and (max-width: 300px) {
+    top: 40px;
+    font-size: 25px;
   }
 `;
 
