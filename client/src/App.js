@@ -7,6 +7,7 @@ import AdminModal from "./components/AdminModal";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
+import Order from "./components/Order";
 import FAQ from "./components/FAQ";
 import BookSlot from "./components/BookSlot";
 import Footer from "./components/Footer";
@@ -31,6 +32,7 @@ const App = () => {
           <Navbar />
           <Home />
           <About />
+          <Order />
           <BookSlot />
           <FAQ />
           <Footer />
