@@ -31,8 +31,8 @@ const App = () => {
           <Navbar />
           <Home />
           <About />
-          <FAQ />
           <BookSlot />
+          <FAQ />
           <Footer />
         </AppComp>
       </AdminProvider>

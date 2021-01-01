@@ -147,8 +147,8 @@ const Navbar = () => {
   let title = useRef(null);
   let burger = useRef(null);
   let about = useRef(null);
-  let faq = useRef(null);
   let bookSlot = useRef(null);
+  let faq = useRef(null);
   let languagePicker = useRef(null);
 
   // Animation for nav items entering. Fade in from top.
@@ -156,7 +156,7 @@ const Navbar = () => {
     let tl = new TimelineLite();
 
     tl.staggerFrom(
-      [title, about, faq, bookSlot, languagePicker],
+      [title, about, bookSlot, faq, languagePicker],
       0.7,
       {
         y: -30,
@@ -275,16 +275,6 @@ const Navbar = () => {
             <NavItem ref={(el) => (about = el)}>about</NavItem>
           </Link>
           <Link
-            to="faq"
-            smooth={true}
-            duration={1000}
-            onClick={() => {
-              closeNavbar();
-            }}
-          >
-            <NavItem ref={(el) => (faq = el)}>faq</NavItem>
-          </Link>
-          <Link
             to="bookslot"
             smooth={true}
             duration={1000}
@@ -293,6 +283,16 @@ const Navbar = () => {
             }}
           >
             <NavItem ref={(el) => (bookSlot = el)}>book slot</NavItem>
+          </Link>
+          <Link
+            to="faq"
+            smooth={true}
+            duration={1000}
+            onClick={() => {
+              closeNavbar();
+            }}
+          >
+            <NavItem ref={(el) => (faq = el)}>faq</NavItem>
           </Link>
           <LanguagePicker
             setNavOpen={setNavOpen}
