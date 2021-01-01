@@ -139,7 +139,7 @@ const Navbar = () => {
 
   // Initialize references
   let navbar = useRef(null);
-  let title = useRef(null);
+  // let title = useRef(null);
   let burger = useRef(null);
   let about = useRef(null);
   let order = useRef(null);
@@ -152,7 +152,7 @@ const Navbar = () => {
     let tl = new TimelineLite();
 
     tl.staggerFrom(
-      [title, about, order, bookSlot, faq, languagePicker],
+      [about, order, bookSlot, faq, languagePicker],
       0.7,
       {
         y: -30,
@@ -243,7 +243,7 @@ const Navbar = () => {
             closeNavbar();
           }}
         >
-          <Title ref={(el) => (title = el)}>
+          <Title>
             <img src={logoText} alt="logoText" />
           </Title>
         </Link>
