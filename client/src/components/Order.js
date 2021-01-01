@@ -144,7 +144,7 @@ const Order = () => {
       <Container>
         <Instructions>
           <Instruction>
-            Go our instagram{" "}
+            Go to our instagram{" "}
             <a href="https://www.instagram.com/benefitted.id/" target="blank">
               @benefitted.id
             </a>
