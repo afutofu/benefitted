@@ -244,7 +244,7 @@ const Navbar = () => {
           }}
         >
           <Title ref={(el) => (title = el)}>
-            <img src={logoText} />
+            <img src={logoText} alt="logoText" />
           </Title>
         </Link>
 
