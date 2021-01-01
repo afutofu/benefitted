@@ -147,6 +147,7 @@ const Navbar = () => {
   let title = useRef(null);
   let burger = useRef(null);
   let about = useRef(null);
+  let order = useRef(null);
   let bookSlot = useRef(null);
   let faq = useRef(null);
   let languagePicker = useRef(null);
@@ -156,7 +157,7 @@ const Navbar = () => {
     let tl = new TimelineLite();
 
     tl.staggerFrom(
-      [title, about, bookSlot, faq, languagePicker],
+      [title, about, order, bookSlot, faq, languagePicker],
       0.7,
       {
         y: -30,
@@ -273,6 +274,16 @@ const Navbar = () => {
             }}
           >
             <NavItem ref={(el) => (about = el)}>about</NavItem>
+          </Link>
+          <Link
+            to="order"
+            smooth={true}
+            duration={1000}
+            onClick={() => {
+              closeNavbar();
+            }}
+          >
+            <NavItem ref={(el) => (order = el)}>Order</NavItem>
           </Link>
           <Link
             to="bookslot"
