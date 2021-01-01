@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import order1 from "../assets/order1.png";
-import order2 from "../assets/order2.png";
-import order3 from "../assets/order3.png";
-import order4 from "../assets/order4.png";
-import order5 from "../assets/order5.png";
+import order1 from "../assets/order1.jpg";
+import order2 from "../assets/order2.jpg";
+import order3 from "../assets/order3.jpg";
+import order4 from "../assets/order4.jpg";
+import order5 from "../assets/order5.jpg";
 
 const OrderComp = styled.section`
   position: relative;
@@ -134,11 +134,7 @@ const Instruction = styled.li`
 const Image = styled.img`
   width: 70%;
   margin-left: ${({ marginLeft }) => (marginLeft ? "auto" : "")};
-  margin-bottom: 30px;
-
-  @media only screen and (max-width: 992px) {
-    margin-bottom: 20px;
-  }
+  margin-bottom: ${({ noMargin }) => (noMargin ? "0" : "30px")};
 `;
 
 const Order = () => {
@@ -164,7 +160,7 @@ const Order = () => {
             Once you are satisfied with our design, we can start discussing
             price.
           </Instruction>
-          <Image src={order2} alt="dm" />
+          <Image src={order2} alt="dm" noMargin={true} />
           <Image src={order3} alt="dm" marginLeft={true} />
           <Instruction>
             You will receive an order form and start booking a slot. To book a
