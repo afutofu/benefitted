@@ -108,17 +108,17 @@ const Slot = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.booked && "#e2d6c0"};
+  background-color: ${(props) => props.booked && "#d3c092"};
   cursor: ${(props) => (props.isAdmin ? "pointer" : "default")};
 
   transition: background-color 0.2s;
 
   :hover {
-    background-color: ${(props) => props.isAdmin && "#e2d6c0"};
+    background-color: ${(props) => props.isAdmin && "#d3c092"};
   }
 
   :active {
-    background-color: ${(props) => props.isAdmin && "#d3c092"};
+    background-color: ${(props) => props.isAdmin && "#e2d6c0"};
   }
 
   @media only screen and (max-width: 992px) {
