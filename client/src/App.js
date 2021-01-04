@@ -16,7 +16,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import { AdminProvider } from "./contexts/AdminContext";
 
 const AppComp = styled.div`
-  background-color: #e9e8e3;
+  background-color: #dfd9c9;
   width: 100%;
   height: 100%;
   min-height: 100vh;
