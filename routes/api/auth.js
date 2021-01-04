@@ -19,8 +19,8 @@ router.post("/", (req, res) => {
     return res.status(400).json({ msg: "Invalid credentials" });
   }
 
-  // If password matches, sign a new jwt that expires in 3 minutes and send it to the client
-  jwt.sign({}, process.env.JWT_KEY, { expiresIn: 180 }, (err, token) => {
+  // If password matches, sign a new jwt that expires in 5 minutes and send it to the client
+  jwt.sign({}, process.env.JWT_KEY, { expiresIn: 300 }, (err, token) => {
     if (err) throw err;
 
     res.json({
@@ -34,7 +34,7 @@ router.post("/", (req, res) => {
 // @access  Private
 router.get("/admin", auth, (req, res) => {
   // Sign a new jwt if token is still available when client loads content
-  jwt.sign({}, process.env.JWT_KEY, { expiresIn: 180 }, (err, token) => {
+  jwt.sign({}, process.env.JWT_KEY, { expiresIn: 300 }, (err, token) => {
     if (err) throw err;
 
     res.json({
