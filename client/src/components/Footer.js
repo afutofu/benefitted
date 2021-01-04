@@ -62,7 +62,7 @@ const Footer = () => {
   return (
     <FooterComp>
       <Container>
-        &#169; 2020 Benefitted. All rights reserved.
+        &#169; 2021 Benefitted. All rights reserved.
         {!isAdmin && (
           <i
             className="fas fa-sign-in-alt"
