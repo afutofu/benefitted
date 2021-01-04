@@ -26,7 +26,7 @@ router.get("/:year/:month", (req, res) => {
 });
 
 // @route   POST /api/slotDate
-// @desc    Authenticate admin
+// @desc    Book a slot date
 // @access  Private
 router.post("/", auth, (req, res) => {
   const { year, month, day } = req.body;
