@@ -113,7 +113,7 @@ const ErrorMessage = styled.p`
   color: red;
 `;
 
-const Input = styled.input.attrs((props) => ({
+const Input = styled.input.attrs(() => ({
   type: "password",
 }))`
   position: relative;
@@ -130,7 +130,7 @@ const Input = styled.input.attrs((props) => ({
   font-family: "Montserrat", "san-serif";
   margin: 0;
   margin-bottom: 20px;
-  letter-spacing: 7px;
+  letter-spacing: 3px;
 `;
 
 const ButtonContainer = styled.div`
@@ -216,6 +216,7 @@ const AdminModal = () => {
         // Close modal after 1 second, allows admin to see the success message
         setTimeout(() => {
           setModalOpen(false);
+          setSuccess(false);
         }, 1000);
       })
       .catch((err) => {
