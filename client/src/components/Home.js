@@ -20,7 +20,7 @@ const Gallery = styled.div`
   width: 100%;
   height: 100%;
   margin-top: 120px;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: #e7e3d7;
   overflow: hidden;
   z-index: 0;
 
