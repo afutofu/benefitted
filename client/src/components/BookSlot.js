@@ -108,7 +108,7 @@ const Slot = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.booked && "#d3c092"};
+  background-color: ${(props) => (props.booked ? "#d3c092" : "#e7e3d7")};
   cursor: ${(props) => (props.isAdmin ? "pointer" : "default")};
 
   transition: background-color 0.2s;
