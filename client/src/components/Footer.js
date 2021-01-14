@@ -8,8 +8,8 @@ const FooterComp = styled.div`
   height: 60px;
   padding: 10px;
   box-sizing: border-box;
-  background-color: #e2d6c0;
-  border-top: 1px solid #d3c092;
+  background-color: #e7e3d7;
+  /* border-top: 1px solid #d3c092; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +23,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.4);
   cursor: default;
 
   @media only screen and (max-width: 768px) {
@@ -44,12 +44,6 @@ const Container = styled.div`
     right: 0px;
     color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
-  }
-
-  p {
-    position: absolute;
-    right: 0px;
-    color: rgba(0, 0, 0, 0.1);
   }
 `;
 
