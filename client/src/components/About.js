@@ -102,9 +102,7 @@ const Pair = styled.div`
   }
 `;
 
-const Image = styled.img.attrs((props) => ({
-  src: props.src,
-}))`
+const Image = styled.img`
   width: 200px;
   height: 500px;
   z-index: 50;
@@ -191,9 +189,7 @@ const Logo = styled.div`
   }
 `;
 
-const LogoImage = styled.img.attrs((props) => ({
-  src: props.src,
-}))`
+const LogoImage = styled.img`
   width: 60%;
   margin-bottom: 10px;
 
@@ -380,7 +376,7 @@ const About = () => {
     let tl = new TimelineLite({
       scrollTrigger: {
         trigger: visionImage,
-        start: "top center",
+        start: "top+=200 center",
         toggleActions: "play none none none",
       },
     });
@@ -411,7 +407,7 @@ const About = () => {
     let tl = new TimelineLite({
       scrollTrigger: {
         trigger: missionImage,
-        start: "top center",
+        start: "top+=200 center",
         toggleActions: "play none none none",
       },
     });

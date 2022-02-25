@@ -76,17 +76,11 @@ const Container = styled.div`
   }
 `;
 
-const ImageWrapper = styled.a.attrs((props) => ({
-  href: props.href,
-  target: "_blank",
-  rel: "noreferrer",
-}))`
+const ImageWrapper = styled.a`
   margin-right: 50px;
 `;
 
-const Image = styled.img.attrs((props) => ({
-  src: props.src,
-}))`
+const Image = styled.img`
   width: 50vh;
   height: 50vh;
   background-color: #e2d6c0;
@@ -167,11 +161,24 @@ const BottomArea = styled.div`
   i {
     position: relative;
     font-size: 25px;
-    animation: ${upAndDown} 2.5s infinite;
-    opacity: 0;
+    /* animation: ${upAndDown} 2.5s infinite; */
+    /* opacity: 0; */
+    margin-right: 10px;
 
     @media only screen and (max-width: 992px) {
       font-size: 20px;
+    }
+  }
+
+  a {
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    border-bottom: #d3c092 4px solid;
+
+    :hover {
+      border-bottom: #e2d6c0 4px solid;
     }
   }
 
@@ -253,7 +260,12 @@ const Home = () => {
           <Container>
             {posts.map((post, i) => {
               return (
-                <ImageWrapper key={i} href={post.permalink}>
+                <ImageWrapper
+                  key={i}
+                  href={post.permalink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Image key={post.id} src={post.media_url} />
                 </ImageWrapper>
               );
@@ -273,7 +285,14 @@ const Home = () => {
         </ContainerWrapper>
       </Gallery>
       <BottomArea>
-        <i className="fas fa-chevron-down" ref={arrow}></i>
+        <i class="fab fa-instagram"></i>
+        <a
+          href="https://www.instagram.com/benefitted.id/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          @benefitted.id
+        </a>
       </BottomArea>
     </HomeComp>
   );
