@@ -13,9 +13,9 @@ router.get("/", (req, res) => {
       `https://graph.instagram.com/me/media?fields=id,media_type, media_url,permalink&access_token=${process.env.IG_ACCESS_TOKEN}`
     )
     .then((IGres) => {
-      // Limit posts from 25 to 10
+      // Limit posts from 25 to 15
       let posts = IGres.data.data.filter((post, i) => {
-        if (i < 10) return post;
+        if (i < 20) return post;
       });
       res.send(posts);
     })
