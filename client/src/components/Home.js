@@ -76,11 +76,36 @@ const Container = styled.div`
   }
 `;
 
-const ImageWrapper = styled.a`
+const MediaWrapper = styled.a`
   margin-right: 50px;
 `;
 
 const Image = styled.img`
+  width: 50vh;
+  height: 50vh;
+  background-color: #e2d6c0;
+
+  transform-origin: center center;
+  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.15);
+
+  transition: box-shadow 0.2s;
+
+  :hover {
+    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 45vh;
+    height: 45vh;
+  }
+
+  @media only screen and (max-width: 450px) {
+    width: 35vh;
+    height: 35vh;
+  }
+`;
+
+const Video = styled.video`
   width: 50vh;
   height: 50vh;
   background-color: #e2d6c0;
@@ -259,15 +284,30 @@ const Home = () => {
         <ContainerWrapper>
           <Container>
             {posts.map((post, i) => {
+              if (post.media_type === "VIDEO") {
+                return (
+                  <MediaWrapper
+                    key={post.id}
+                    href={post.permalink}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Video autoplay={true}>
+                      <source src={post.media_url} type="video/mp4" />
+                    </Video>
+                  </MediaWrapper>
+                );
+              }
+
               return (
-                <ImageWrapper
+                <MediaWrapper
                   key={i}
                   href={post.permalink}
                   target="_blank"
                   rel="noreferrer"
                 >
                   <Image key={post.id} src={post.media_url} />
-                </ImageWrapper>
+                </MediaWrapper>
               );
             })}
             <Prompt>
