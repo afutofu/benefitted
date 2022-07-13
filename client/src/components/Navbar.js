@@ -46,6 +46,7 @@ const Backdrop = styled.div`
 
 const Container = styled.div`
   width: 90%;
+  height:100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -236,7 +237,7 @@ const Navbar = () => {
     <NavbarComp ref={(el) => (navbar = el)}>
       <Container>
         <Link
-          to="about"
+          to="home"
           smooth={true}
           duration={1000}
           onClick={() => {
