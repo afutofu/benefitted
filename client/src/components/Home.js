@@ -50,6 +50,7 @@ const ContainerWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  cursor:grab;
   overflow-x: scroll;
   scrollbar-width: none;
   padding-bottom: 20px;
@@ -57,7 +58,7 @@ const ContainerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  -webkit-overflow-scrolling: touch;
+  /* -webkit-overflow-scrolling: touch; */
 `;
 
 const Container = styled.div`
@@ -78,6 +79,8 @@ const Container = styled.div`
 
 const MediaWrapper = styled.a`
   margin-right: 50px;
+  /* pointer-events: ${(props) => props.isDown ? "none" : "auto"}; */
+  /* pointer-events:none; */
 `;
 
 const Image = styled.img`
@@ -151,7 +154,7 @@ const Prompt = styled.div`
   }
 `;
 
-const upAndDown = keyframes`{
+const upAndDown = keyframes`
     0% {
       transform: translateY(0);
     }
@@ -174,7 +177,7 @@ const upAndDown = keyframes`{
     100% {
       transform: translateY(0px);
     }
-  }`;
+  `;
 
 const BottomArea = styled.div`
   width: 100%;
@@ -212,6 +215,12 @@ const BottomArea = styled.div`
   }
 `;
 
+// Initialize mouse movement variable
+let isDown = false;
+let startX;
+let scrollLeft;
+let isScrolling = false;
+
 const Home = () => {
   // Retreive language from LanguageContext
   const [language] = useContext(LanguageContext);
@@ -219,6 +228,7 @@ const Home = () => {
   // Initialize references
   let galleryCover = useRef(null);
   let arrow = useRef(null);
+  let galleryContainer = useRef(null);
 
   // Initialize states
   const [posts, setPosts] = useState([]);
@@ -248,6 +258,33 @@ const Home = () => {
 
     return tl;
   };
+
+  // Functions for mouse movements
+  const onMouseDown = (e) =>{
+    isDown = true;
+    if (galleryContainer.current === null) return;
+    startX = e.pageX - galleryContainer.current.offsetLeft;
+    scrollLeft = galleryContainer.current.scrollLeft;
+  }
+
+  const onMouseLeave = (e) =>{
+    setTimeout(()=>{
+      isDown = false;
+      isScrolling = false;
+    },10)
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  const onMouseMove = (e) =>{
+    if (!isDown) return;
+    if (galleryContainer.current === null) return;
+    isScrolling = true
+    e.preventDefault();
+    const x = e.pageX - galleryContainer.current.offsetLeft;
+    const walk = (x - startX) * 2 // Scroll speed
+    galleryContainer.current.scrollLeft = scrollLeft - walk;
+  }
 
   // Retreive posts from API
   useEffect(() => {
@@ -281,8 +318,12 @@ const Home = () => {
         <GalleryCover ref={galleryCover}>
           {postsLoading && <RippleSpinner />}
         </GalleryCover>
-        <ContainerWrapper>
-          <Container>
+        <ContainerWrapper ref={galleryContainer} 
+          onMouseDown={(e) => onMouseDown(e)} 
+          onMouseLeave={(e)=>onMouseLeave(e)} 
+          onMouseUp={onMouseLeave}
+          onMouseMove={(e)=>onMouseMove(e)}>
+          <Container >
             {posts.map((post, i) => {
               if (post.media_type === "VIDEO") {
                 return (
@@ -291,6 +332,7 @@ const Home = () => {
                     href={post.permalink}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={e=> isScrolling && e.preventDefault()}
                   >
                     <Video autoplay={true}>
                       <source src={post.media_url} type="video/mp4" />
@@ -305,6 +347,7 @@ const Home = () => {
                   href={post.permalink}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={e=> isScrolling && e.preventDefault()}
                 >
                   <Image key={post.id} src={post.media_url} />
                 </MediaWrapper>
@@ -325,7 +368,7 @@ const Home = () => {
         </ContainerWrapper>
       </Gallery>
       <BottomArea>
-        <i class="fab fa-instagram"></i>
+        <i className="fab fa-instagram"></i>
         <a
           href="https://www.instagram.com/benefitted.id/"
           target="_blank"
