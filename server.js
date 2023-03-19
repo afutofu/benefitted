@@ -23,29 +23,44 @@ app.use("/api/slotDates", slotDateRoutes);
 app.use("/api/posts", postRoutes);
 
 // CONNECT TO DB
-mongoose.connect(
-  process.env.DB_CONNECTION,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  },
-  () => {
-    console.log("Connected to DB!");
+// mongoose.connect(
+//   process.env.DB_CONNECTION,
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false,
+//     useCreateIndex: true,
+//   },
+//   () => {
+//     console.log("Connected to DB!");
 
-    // START SERVER
-    app.listen(PORT, () => {
-      console.log("Server now listening on port 5000");
-    });
+//     // START SERVER
+//     app.listen(PORT, () => {
+//       console.log("Server now listening on port 5000");
+//     });
+//   }
+// );
+
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.DB_CONNECTION);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
   }
-);
+};
 
 // SERVE STATIC ASSETS IF IN PRODUCTION
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+app.use(express.static("client/build"));
 
-  app.get("*", (_req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+app.get("*", (_req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
+
+//Connect to the database before listening
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log("listening for requests");
   });
-}
+});
