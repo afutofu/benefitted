@@ -31,7 +31,14 @@ mongoose.connect(
     useFindAndModify: false,
     useCreateIndex: true,
   },
-  () => console.log("Connected to DB!")
+  () => {
+    console.log("Connected to DB!");
+
+    // START SERVER
+    app.listen(PORT, () => {
+      console.log("Server now listening on port 5000");
+    });
+  }
 );
 
 // SERVE STATIC ASSETS IF IN PRODUCTION
@@ -42,8 +49,3 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-
-// START SERVER
-app.listen(PORT, () => {
-  console.log("Server now listening on port 5000");
-});
